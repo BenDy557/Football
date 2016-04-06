@@ -2,7 +2,8 @@
 
 GameObjectIso::GameObjectIso()
 {
-	setSize(sf::Vector2f(TILE_SCALE,TILE_SCALE));
+	//setScale(sf::Vector2f(TILE_SCALE,TILE_SCALE));
+	//setSize(sf::Vector2f(TILE_SCALE,TILE_SCALE));
 	mHasShadow = false;
 	worldPositionZ = 0.0f;
 	mShadow = 0;
@@ -10,13 +11,15 @@ GameObjectIso::GameObjectIso()
 
 GameObjectIso::GameObjectIso(bool hasShadowIn)
 {
-	setSize(sf::Vector2f(TILE_SCALE,TILE_SCALE));
+	//setScale(sf::Vector2f(TILE_SCALE,TILE_SCALE));
+	//setSize(sf::Vector2f(TILE_SCALE,TILE_SCALE));
 	mHasShadow = hasShadowIn;
 	worldPositionZ = 0.0f;
 	if(mHasShadow)
 	{
 		mShadow = new GameObjectIso(false);
-		mShadow->setSize(sf::Vector2f(TILE_SCALE,TILE_SCALE));
+		//mShadow->setSize(sf::Vector2f(TILE_SCALE,TILE_SCALE));
+		//mShadow->setScale(sf::Vector2f(TILE_SCALE,TILE_SCALE));
 		mShadow->setOrigin((TILE_SCALE/2),(TILE_SCALE*3/4));
 	}
 }
@@ -78,6 +81,11 @@ void GameObjectIso::Update()//TODO//11-09-15//DeltaTime//Might overwrite sf::rec
 	{
 		mShadow->setPosition(((worldPosition.x*(TILE_SCALE/2))+(worldPosition.y*(TILE_SCALE/2)))
 						   ,((-worldPosition.x*(TILE_SCALE/4))+(worldPosition.y*(TILE_SCALE/4))));
+		
+		//float tempShadowScale = 1.0f+worldPositionZ/2;
+		//mShadow->setScale(1.0f-(1.0f*worldPositionZ),1.0f-(1.0f*worldPositionZ));
+		//mShadow->setScale(tempShadowScale,tempShadowScale);
+		//mShadow->setColor(sf::Color(255.0f,255.0f,255.0f,25(255.0f*(tempShadowScale))));
 	}
 	//setPosition(((worldPosition.x*1)+(worldPosition.y*0.5))-cameraPos->x
 	//		  ,(((worldPosition.y*0.5)-(worldPosition.x*1)))-cameraPos->y);

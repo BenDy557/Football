@@ -64,7 +64,7 @@ public:
 	void setTileY(int yIn);
 	int getTileY();
 
-	void setColor(sf::Color colorIn);
+	//void setColor(sf::Color colorIn);
 
 	float getDeadZone();
 //VARIABLES

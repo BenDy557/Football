@@ -7,7 +7,7 @@
 //#include "Vector3.h"
 #include "globals.h"
 //ISOMETRIC GAME OBJECT
-class GameObjectIso : public sf::RectangleShape
+class GameObjectIso : public sf::Sprite
 {
 	//METHODS
 private:
@@ -42,7 +42,7 @@ private:
 	
 public:
 	bool mHasShadow;
-	sf::RectangleShape *mShadow;
+	sf::Sprite *mShadow;
 
 protected:
 	

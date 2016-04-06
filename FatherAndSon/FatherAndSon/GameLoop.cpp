@@ -50,8 +50,9 @@ void GameLoop::GameInitialise()
 		{
 			GameObjectIso tempTile(false);
 
-			tempTile.setSize(sf::Vector2f(TILE_SCALE,TILE_SCALE));//TODO//21-10-15//MagicNumbers
-			tempTile.setTexture(&tilesetTexture,false);
+			//tempTile.setSize(sf::Vector2f(TILE_SCALE,TILE_SCALE));//TODO//21-10-15//MagicNumbers
+			//tempTile.setScale(sf::Vector2f(TILE_SCALE,TILE_SCALE));
+			tempTile.setTexture(tilesetTexture,false);
 			tempTile.setTextureRect(sf::IntRect(TILE_SCALE*(rand()%10),TILE_SCALE*(rand()%2),TILE_SCALE,TILE_SCALE));//TODO//11-09-15//Set to random floor type
 			//tempTile.setCameraPos(mainCamera.position);
 			tempTile.setOrigin((TILE_SCALE/2),(TILE_SCALE*3/4));//TODO//21-10-15//MagicNumbers
@@ -68,29 +69,38 @@ void GameLoop::GameInitialise()
 	//GAMEOBJECTS//////////////////////////////
 	//////////////////////////////GAMEOBJECTS//
 	mBall = new Ball(true);
-	mBall->setSize(sf::Vector2f(TILE_SCALE,TILE_SCALE));
-	mBall->setTexture(&mBallTexture,true);
+	//mBall->setSize(sf::Vector2f(TILE_SCALE,TILE_SCALE));
+	//mBall->setScale(sf::Vector2f(TILE_SCALE,TILE_SCALE));
+	mBall->setTexture(mBallTexture,true);
 	mBall->setOrigin(TILE_SCALE/2,(TILE_SCALE*3/4));
 	mBall->setWorldPosition(5.0f,5.0f);
-	mBall->mShadow->setTexture(&mShadowTexture,true);
+	mBall->mShadow->setTexture(mShadowTexture,true);
 	mBall->setDeltaTime(&deltaTime);
 	
 	//PLAYER///////////////////////////////////
-	player = new Player(true);
-	player->Initialise(sf::Vector2f(100.0f,100.0f),sf::Color::White);//TODO//21-10-15//MagicNumbers
-	player->setTexture(&mPlayertexture,false);
-	player->setOrigin((TILE_SCALE/2),(TILE_SCALE*3/4));//TODO//21-10-15//MagicNumbers
-	player->mShadow->setTexture(&mShadowTexture,true);
-	player->setDeltaTime(&deltaTime);
-	player->SetBall(mBall);
+	mPlayer = new Player(true);
+	mPlayer->Initialise(sf::Vector2f(100.0f,100.0f),sf::Color::Blue);//TODO//21-10-15//MagicNumbers
+	mPlayer->setTexture(mPlayertexture,false);
+	mPlayer->setOrigin((TILE_SCALE/2),(TILE_SCALE*3/4));//TODO//21-10-15//MagicNumbers
+	mPlayer->mShadow->setTexture(mShadowTexture,true);
+	mPlayer->setDeltaTime(&deltaTime);
+	mPlayer->SetBall(mBall);
 	//player.setCameraPos(mainCamera.position);
 
+	mPlayerRed = new Player(true);
+	mPlayerRed->Initialise(sf::Vector2f(300.0f,150.0f),sf::Color::Red);//TODO//21-10-15//MagicNumbers
+	mPlayerRed->setTexture(mPlayertexture,false);
+	mPlayerRed->setOrigin((TILE_SCALE/2),(TILE_SCALE*3/4));//TODO//21-10-15//MagicNumbers
+	mPlayerRed->mShadow->setTexture(mShadowTexture,true);
+	mPlayerRed->setDeltaTime(&deltaTime);
+	mPlayerRed->SetBall(mBall);
 
 	//CAMERA///////////////////////////////////
 	//mainCamera.position//TODO//13-09-15//Proper initialise function
-	mainCamera.SetTargetWorld(ConvertSFVector2(player->getPosition()));//SetToReference
-	cameraTargetIcon.setSize(sf::Vector2f(TILE_SCALE,TILE_SCALE));
-	cameraTargetIcon.setTexture(&debugCameraTexture,true);
+	mainCamera.SetTargetWorld(ConvertSFVector2(mBall->getPosition()));//SetToReference
+	//cameraTargetIcon.setSize(sf::Vector2f(TILE_SCALE,TILE_SCALE));
+	//cameraTargetIcon.setScale(sf::Vector2f(TILE_SCALE,TILE_SCALE));
+	cameraTargetIcon.setTexture(debugCameraTexture,true);
 	//cameraTargetIcon.setCameraPos(mainCamera.position);
 	cameraTargetIcon.setOrigin(TILE_SCALE/2,(TILE_SCALE*3/4));//TODO//21-10-15//MagicNumbers
 	cameraTargetIcon.setWorldPosition(0.0f,0.0f);
@@ -109,8 +119,10 @@ void GameLoop::GameInitialise()
 
 void GameLoop::Update(sf::RenderWindow &tempWind, sf::Clock tempClock)
 {
-	player->Input(playerController.SendInput());
-	mainCamera.Input(playerController.SendInput());
+	mPlayer->Input(mPlayerController.SendInput());
+	mPlayerRed->Input(mPlayerControllerRed.SendInput());
+
+	mainCamera.Input(mPlayerController.SendInput());
 	tempWind.setView(mainView);
 
 	//DELTA TIME////////////////////////////
@@ -160,7 +172,8 @@ void GameLoop::Update(sf::RenderWindow &tempWind, sf::Clock tempClock)
 	//UPDATES///////////////////////////////
 	//mBall->moveWorldPosition(0.01f,0.03f);
 
-	player->Update();
+	mPlayer->Update();
+	mPlayerRed->Update();
 	
 	mBall->Update();
 
@@ -175,7 +188,7 @@ void GameLoop::Update(sf::RenderWindow &tempWind, sf::Clock tempClock)
 	cameraTargetIcon.setWorldPosition(mainCamera.GetTargetWorldPosition().x,mainCamera.GetTargetWorldPosition().y);//TODO//22-10-15//Classify as debug ui
 	cameraTargetIcon.Update();
 
-	mainCamera.SetTargetWorld(player->getWorldPosition());
+	mainCamera.SetTargetWorld(mBall->getWorldPosition());
 	mainCamera.Update();
 
 
@@ -213,8 +226,11 @@ void GameLoop::Draw(sf::RenderWindow &tempWind)
 		tempWind.draw(EnvironmentTiles[i]);
 	}
 
-	tempWind.draw(*player->mShadow);
-	tempWind.draw(*player);
+	tempWind.draw(*mPlayer->mShadow);
+	tempWind.draw(*mPlayer);
+
+	tempWind.draw(*mPlayerRed->mShadow);
+	tempWind.draw(*mPlayerRed);
 	//tempWind.draw(cameraTargetIcon);
 	
 	tempWind.draw(*mBall->mShadow);
@@ -305,32 +321,32 @@ void GameLoop::EventLoop(sf::RenderWindow &tempWind)
 
 			if(event.key.code == sf::Keyboard::S)
 			{
-				playerController.state.leftStick.x = 0.0f;
-				playerController.state.leftStick.y = 100.0f;
+				mPlayerController.state.leftStick.x = 0.0f;
+				mPlayerController.state.leftStick.y = 100.0f;
 			}
 
 			if(event.key.code == sf::Keyboard::D)
 			{
-				playerController.state.leftStick.x = 100.0f;
-				playerController.state.leftStick.y = 0.0f;
+				mPlayerController.state.leftStick.x = 100.0f;
+				mPlayerController.state.leftStick.y = 0.0f;
 			}
 
 			if(event.key.code == sf::Keyboard::A)
 			{
-				playerController.state.leftStick.x = -100.0f;
-				playerController.state.leftStick.y = 0.0f;
+				mPlayerController.state.leftStick.x = -100.0f;
+				mPlayerController.state.leftStick.y = 0.0f;
 			}
 
 			if(event.key.code == sf::Keyboard::W)
 			{
-				playerController.state.leftStick.x = 0.0f;
-				playerController.state.leftStick.y = -100.0f;
+				mPlayerController.state.leftStick.x = 0.0f;
+				mPlayerController.state.leftStick.y = -100.0f;
 			}
 
 			if(event.key.code == sf::Keyboard::X)
 			{
-				playerController.state.leftStick.x = 0.0f;
-				playerController.state.leftStick.y = 0.0f;
+				mPlayerController.state.leftStick.x = 0.0f;
+				mPlayerController.state.leftStick.y = 0.0f;
 			}
 
 			break;
@@ -341,15 +357,27 @@ void GameLoop::EventLoop(sf::RenderWindow &tempWind)
 			//A=0,B=1,X=2,Y=3,LB=4,RB=5,Back=6,Start=7,LS=8,RS=9
 			if(event.joystickButton.joystickId == 0)
 			{
-				playerController.state.buttons[event.joystickButton.button] = true;
+				mPlayerController.state.buttons[event.joystickButton.button] = true;
 			}
+
+			if(event.joystickButton.joystickId == 1)
+			{
+				mPlayerControllerRed.state.buttons[event.joystickButton.button] = true;
+			}
+
 			break;
 
 		case sf::Event::JoystickButtonReleased:
 			if(event.joystickButton.joystickId == 0)
 			{
-				playerController.state.buttons[event.joystickButton.button] = false;
+				mPlayerController.state.buttons[event.joystickButton.button] = false;
 			}
+
+			if(event.joystickButton.joystickId == 1)
+			{
+				mPlayerControllerRed.state.buttons[event.joystickButton.button] = false;
+			}
+
 			break;
 			
 			//JOSTICK INPUT/////////////////////////
@@ -359,20 +387,42 @@ void GameLoop::EventLoop(sf::RenderWindow &tempWind)
 				//Left Stick
 				if(event.joystickMove.axis == sf::Joystick::X)
 				{
-					playerController.state.leftStick.x = event.joystickMove.position;		
+					mPlayerController.state.leftStick.x = event.joystickMove.position;		
 				}
 				if(event.joystickMove.axis == sf::Joystick::Y)
 				{
-					playerController.state.leftStick.y = event.joystickMove.position;		
+					mPlayerController.state.leftStick.y = event.joystickMove.position;		
 				}
 				//Right Stick
 				if(event.joystickMove.axis == sf::Joystick::U)
 				{
-					playerController.state.rightStick.x = event.joystickMove.position;
+					mPlayerController.state.rightStick.x = event.joystickMove.position;
 				}
 				if(event.joystickMove.axis == sf::Joystick::R)
 				{
-					playerController.state.rightStick.y = event.joystickMove.position;		
+					mPlayerController.state.rightStick.y = event.joystickMove.position;		
+				}
+			}
+
+			if(event.joystickMove.joystickId == 1)
+			{
+				//Left Stick
+				if(event.joystickMove.axis == sf::Joystick::X)
+				{
+					mPlayerControllerRed.state.leftStick.x = event.joystickMove.position;		
+				}
+				if(event.joystickMove.axis == sf::Joystick::Y)
+				{
+					mPlayerControllerRed.state.leftStick.y = event.joystickMove.position;		
+				}
+				//Right Stick
+				if(event.joystickMove.axis == sf::Joystick::U)
+				{
+					mPlayerControllerRed.state.rightStick.x = event.joystickMove.position;
+				}
+				if(event.joystickMove.axis == sf::Joystick::R)
+				{
+					mPlayerControllerRed.state.rightStick.y = event.joystickMove.position;		
 				}
 			}
 			break;
@@ -392,8 +442,8 @@ void GameLoop::ShowDebug(sf::RenderWindow &tempWind)
 	else if(debugMode == 1)//TODO
 	{
 		tempWind.draw(DisplayText(Vector2(0.0f,0.0f),"PlayerData"));
-		tempWind.draw(DisplayText(Vector2(0.0f,20.0f),"PlayerX",player->getPosition().x));
-		tempWind.draw(DisplayText(Vector2(0.0f,40.0f),"PlayerY",player->getPosition().y));
+		tempWind.draw(DisplayText(Vector2(0.0f,20.0f),"PlayerX",mPlayer->getPosition().x));
+		tempWind.draw(DisplayText(Vector2(0.0f,40.0f),"PlayerY",mPlayer->getPosition().y));
 	}
 	else if(debugMode == 2)//curr FPS Debug
 	{
@@ -404,8 +454,8 @@ void GameLoop::ShowDebug(sf::RenderWindow &tempWind)
 	else if(debugMode == 3)//Controller Information
 	{
 		tempWind.draw(DisplayText(Vector2(0.0f,0.0f),"ControllerData"));
-		tempWind.draw(DisplayText(Vector2(0.0f,20.0f),"JoystickX: ",playerController.state.leftStick.x));
-		tempWind.draw(DisplayText(Vector2(0.0f,40.0f),"JoystickY: ",playerController.state.leftStick.y));
+		tempWind.draw(DisplayText(Vector2(0.0f,20.0f),"JoystickX: ",mPlayerController.state.leftStick.x));
+		tempWind.draw(DisplayText(Vector2(0.0f,40.0f),"JoystickY: ",mPlayerController.state.leftStick.y));
 	}
 	else if(debugMode == 4)//Camera Information
 	{

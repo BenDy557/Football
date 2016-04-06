@@ -43,6 +43,8 @@ public:
 	Vector2 getVelocity();
 	void SetVelocity(Vector2 velocityIn);
 	void SetVelocity(Vector2 velocityIn,float zVelocityIn);
+	void IncrementVelocity(Vector2 velocityIn);
+	void IncrementVelocity(Vector2 velocityIn, float zVelocityIn);
 	float getVelocityMagnitude();
 
 	void setDeltaTime(float *deltaTimeIn);

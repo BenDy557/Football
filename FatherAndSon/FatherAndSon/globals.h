@@ -84,6 +84,7 @@ const int TILE_SCALE = 64.0f;
 const Vector2 RESET_POSITION(380.0f,280.0f);
 
 //COLOURS (colors)
+const sf::Color blue(0.0f,0.0f,255.0f);
 const sf::Color brightGreen(64.0f,255.0f,64.0f);
 const sf::Color fullGreen(0.0f,255.0f,0.0f);
 const sf::Color normalGreen(0.0f,192.0f,0.0f);

@@ -26,17 +26,6 @@
 class GameLoop
 {
 //METHODS
-private:
-	void EventLoop(sf::RenderWindow &tempWind);
-	void ShowDebug(sf::RenderWindow &tempWind);
-	sf::Text DisplayText(Vector2 positionIn,std::string phraseIn, float valueIn);
-	sf::Text DisplayText(Vector2 positionIn,std::string phraseIn);
-	void ResolveBulletPlayerCollision();
-	void Collision();
-	void Draw(sf::RenderWindow &tempWind);
-
-	void Reset();
-	void Pause();
 public:
 	GameLoop()
 		:aiThread(&GameLoop::AIUpdate,this)
@@ -56,8 +45,21 @@ public:
 	void Update(sf::RenderWindow &tempWind,sf::Clock tempClock);
 	void AIUpdate();
 	//void Draw();
+private:
+	void EventLoop(sf::RenderWindow &tempWind);
+	void ShowDebug(sf::RenderWindow &tempWind);
+	sf::Text DisplayText(Vector2 positionIn,std::string phraseIn, float valueIn);
+	sf::Text DisplayText(Vector2 positionIn,std::string phraseIn);
+	void ResolveBulletPlayerCollision();
+	void Collision();
+	void Draw(sf::RenderWindow &tempWind);
+
+	void Reset();
+	void Pause();
 
 //VARIABLES
+public:
+
 private:
 	sf::Thread aiThread;
 	sf::Time gameTime;
@@ -109,11 +111,13 @@ private:
 	MapGrid EnvironmentTileGrid;//TODO//23-10-2015//make exist
 		
 	//Players
-	Player* player;
-	PlayerController playerController;
+	Player* mPlayer;
+	PlayerController mPlayerController;
 
+	Player* mPlayerRed;
+	PlayerController mPlayerControllerRed;
 	
-public:
+
 	
 };
 

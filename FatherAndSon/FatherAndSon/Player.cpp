@@ -7,9 +7,8 @@ Player::Player(bool hasShadowIn):
 {
 	mPtrBall = nullptr;
 
-	setFillColor(sf::Color::Green);
 	//setSize(sf::Vector2f(20.0f,20.0f));
-	
+	setColor(blue);
 
 	mSpriteSheetMax.x = 4;
 	mSpriteSheetMax.y = 4;
@@ -197,27 +196,36 @@ void Player::Kick()
 {
 	if(mGrounded)
 	{
-		mZVelocity = 2.0f;
+		mZVelocity = 2.5f;
 		mKickReady = false;
 
 		//Chip
 		if(abs((mPtrBall->getWorldPosition().Get_magnitude() - getWorldPosition().Get_magnitude()))<mKickDistance
 			&& abs(mPtrBall->getWorldPositionZ()-getWorldPositionZ())<mVerticalKickDistance)
 		{	
-			mPtrBall->SetVelocity(acceleration*0.2f,5.0f);
+			mPtrBall->IncrementVelocity(acceleration*0.3f,0.0f);
 		}
 		
 	}
 	else if(mKickReady)//if in air and havent kicked already
 	{
-		mZVelocity = 1.0f;
+		
 		mKickReady = false;
 
 		if(abs((mPtrBall->getWorldPosition().Get_magnitude() - getWorldPosition().Get_magnitude()))<mKickDistance
 			&& abs(mPtrBall->getWorldPositionZ()-getWorldPositionZ())<mVerticalKickDistance)
 		{
-			mPtrBall->SetVelocity(acceleration*0.4f,0.0f);
+			if(mZVelocity>0)
+			{
+				mPtrBall->IncrementVelocity(acceleration*0.4f,7.0f);
+			}
+			else
+			{
+				mPtrBall->IncrementVelocity(acceleration*0.4f,-3.0f);
+			}
 		}
+
+		mZVelocity = 1.0f;
 	}
 }
 
@@ -297,7 +305,7 @@ void Player::SpriteAnimation()
 
 
 	mTopLeftSpriteCoord.x = mSpriteCoord.x * TILE_SCALE;
-	mTopLeftSpriteCoord.y = mSpriteCoord.y *TILE_SCALE;
+	mTopLeftSpriteCoord.y = mSpriteCoord.y * TILE_SCALE;
 
 	setTextureRect(sf::IntRect(mTopLeftSpriteCoord.x,mTopLeftSpriteCoord.y,TILE_SCALE,TILE_SCALE));
 }
@@ -452,10 +460,11 @@ float Player::getVelocityMagnitude()
 	return velocity.Get_magnitude();
 }
 
-void Player::setColor(sf::Color colorIn)
+/*void Player::setColor(sf::Color colorIn)
 {
-	setFillColor(colorIn);
-}
+	//setFillColor(colorIn);
+	Sprite.setColor(colorIn);
+}*/
 
 void Player::setDeltaTime(float *deltaTimeIn)
 {
