@@ -1,0 +1,46 @@
+﻿Build started 06/04/2016 15:08:31.
+     1>Project "M:\Masters\NetworkGameDevelopment\Coursework\FatherAndSon\FatherAndSon\FatherAndSon.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\FatherAndSon.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         All outputs are up-to-date.
+       ManifestResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\FatherAndSon.exe.embed.manifest.res" Debug\FatherAndSon_manifest.rc 
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"M:\Masters\NetworkGameDevelopment\Coursework\FatherAndSon\Debug\FatherAndSon.exe" /INCREMENTAL /NOLOGO /LIBPATH:"M:\Masters\Libraries\SFML-2.2\lib" "sfml-graphics-s-d.lib" glew.lib freetype.lib jpeg.lib opengl32.lib "sfml-window-s-d.lib" gdi32.lib winmm.lib "sfml-system-s-d.lib" "sfml-audio-s-d.lib" sndfile.lib openal32.lib "sfml-main-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\FatherAndSon.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"M:\Masters\NetworkGameDevelopment\Coursework\FatherAndSon\Debug\FatherAndSon.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"M:\Masters\NetworkGameDevelopment\Coursework\FatherAndSon\Debug\FatherAndSon.lib" /MACHINE:X86 Debug\FatherAndSon.exe.embed.manifest.res
+         Debug\Ball.obj
+         Debug\Camera.obj
+         Debug\GameLoop.obj
+         Debug\GameObjectIso.obj
+         Debug\main.obj
+         Debug\MapGrid.obj
+         Debug\ParticleEmitter.obj
+         Debug\Player.obj
+         Debug\PlayerController.obj
+         Debug\Ray.obj
+         Debug\Vector2.obj
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\FatherAndSon.exe.embed.manifest" /manifest Debug\FatherAndSon.exe.intermediate.manifest
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\FatherAndSon.exe.embed.manifest.res" Debug\FatherAndSon_manifest.rc 
+       LinkEmbedManifest:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"M:\Masters\NetworkGameDevelopment\Coursework\FatherAndSon\Debug\FatherAndSon.exe" /INCREMENTAL /NOLOGO /LIBPATH:"M:\Masters\Libraries\SFML-2.2\lib" "sfml-graphics-s-d.lib" glew.lib freetype.lib jpeg.lib opengl32.lib "sfml-window-s-d.lib" gdi32.lib winmm.lib "sfml-system-s-d.lib" "sfml-audio-s-d.lib" sndfile.lib openal32.lib "sfml-main-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\FatherAndSon.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"M:\Masters\NetworkGameDevelopment\Coursework\FatherAndSon\Debug\FatherAndSon.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"M:\Masters\NetworkGameDevelopment\Coursework\FatherAndSon\Debug\FatherAndSon.lib" /MACHINE:X86 Debug\FatherAndSon.exe.embed.manifest.res
+         Debug\Ball.obj
+         Debug\Camera.obj
+         Debug\GameLoop.obj
+         Debug\GameObjectIso.obj
+         Debug\main.obj
+         Debug\MapGrid.obj
+         Debug\ParticleEmitter.obj
+         Debug\Player.obj
+         Debug\PlayerController.obj
+         Debug\Ray.obj
+         Debug\Vector2.obj
+         FatherAndSon.vcxproj -> M:\Masters\NetworkGameDevelopment\Coursework\FatherAndSon\Debug\FatherAndSon.exe
+       FinalizeBuildStatus:
+         Deleting file "Debug\FatherAndSon.unsuccessfulbuild".
+         Touching "Debug\FatherAndSon.lastbuildstate".
+     1>Done Building Project "M:\Masters\NetworkGameDevelopment\Coursework\FatherAndSon\FatherAndSon\FatherAndSon.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.48

@@ -1,0 +1,9 @@
+//Problem 1
+//Right analog stick not initialised on launch
+//Solution
+//when analog sticks were at 0, movement and aiming bearing were undefined
+
+//Problem 2
+//45 degree offset on camera move
+//Solution
+//added 45 degrees to input funciton in camera class
