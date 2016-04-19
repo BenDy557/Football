@@ -22,20 +22,23 @@ class Player : public GameObjectIso
 {
 //METHODS
 private://?
-	void Movement();
-	void Aiming();
 	void Actions();
+	void Movement();
+	void Collision();
+	void Aiming();
+	
 	void UpdatePosition();
 	
 	void Jump();
 	void Kick();
+	void Chip();
 	void SpriteAnimation();
 
 public:
 	Player(bool hasShadowIn);//TODO//OLD
 	void Initialise(sf::Vector2f positionIn,sf::Color colorIn);//TODO//OLD
 	void Update();//TODO//OLD
-	void Input(PlayerInput &tempInput);//TODO//OLD
+	void SetInput(PlayerInput* playerInputIn);
 	bool CheckBoxCollide(sf::RectangleShape boundingBoxIn);//TODO//OLD
 
 	float getMovementBearing();
@@ -72,7 +75,7 @@ private:
 	float deadZone;//0.0f -> 0.1f;
 
 	float* ptrDeltaTime;
-	PlayerInput inputState;
+	PlayerInput* ptrInputState;
 	
 	float lastMovementBearing;
 	float lastAimingBearing;
@@ -108,6 +111,8 @@ private:
 	Ray positionVelocityRay;
 	
 public:
+	int mPlayerNumber;
+
 	sf::Vector2f prevPosition;
 	sf::RectangleShape lastCollisionMarker;//TODO//OLD
 };

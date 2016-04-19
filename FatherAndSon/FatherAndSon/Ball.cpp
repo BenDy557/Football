@@ -99,3 +99,13 @@ void Ball::IncrementVelocity(Vector2 velocityIn, float zVelocityIn)
 	velocity = velocity+velocityIn;
 	mZVelocity += zVelocityIn;
 }
+
+Vector2 Ball::GetVelocity()
+{
+	return velocity;
+}
+
+float Ball::GetVelocityZ()
+{
+	return mZVelocity;
+}

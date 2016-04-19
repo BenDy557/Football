@@ -1,5 +1,15 @@
+
+
+
+#define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 #include <iostream>
+
+//Winsock
+//#include <winsock2.h>
+//#pragma comment(lib, "ws2_32.lib")
+
+//SFML
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
@@ -35,12 +45,16 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	//float fps=1000000/time.asMicroseconds();
 	//elapsed microseconds/1,000,000 = delta time
 
+
+	gameLoop.SetClock(&clock);
+	gameLoop.SetWindow(&window);
 	////////////////////////////////////////
 	//WINDOW OPEN///////////////////////////
     while (window.isOpen())
     {
 		window.clear();
-		gameLoop.Update(window,clock);
+		
+		gameLoop.Update();
         window.display();
     }
     return 0;

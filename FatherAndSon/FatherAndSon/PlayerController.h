@@ -13,7 +13,7 @@ class PlayerController
 //METHODS
 public:
 	PlayerController();
-
+	void Update();
 	
 private:
 	void ResolveJoystickIntensity();
@@ -22,12 +22,13 @@ private:
 
 //VARIABLES
 public:
-	PlayerInput SendInput();
+	//PlayerInput SendInput();
 	ControllerState state;
+	PlayerInput* inputToSend;
 private:
 	//int controller_number;
 	float deadZone;
-	PlayerInput inputToSend;
+	
 
 };
 

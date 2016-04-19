@@ -40,7 +40,8 @@ public:
 	void setMovementIntensity(float intensityScaleIn);
 
 
-	Vector2 getVelocity();
+	Vector2 GetVelocity();
+	float GetVelocityZ();
 	void SetVelocity(Vector2 velocityIn);
 	void SetVelocity(Vector2 velocityIn,float zVelocityIn);
 	void IncrementVelocity(Vector2 velocityIn);

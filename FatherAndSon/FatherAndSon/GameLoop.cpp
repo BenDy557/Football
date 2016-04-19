@@ -1,6 +1,14 @@
 #include "GameLoop.h"
 
-
+void GameLoop::LoadTextures()
+{
+	//DEBUG TEXT///////////////////////////////
+	if (!verdana.loadFromFile("resources/verdana.ttf"))
+	{
+		// error...//TODO
+		MessageBox(NULL,L"Error loading verdana.ttf",L"Error",MB_OK);
+	}
+}
 void GameLoop::GameInitialise()
 {
 	//TEXTURE LOADING//////////////////////////
@@ -34,12 +42,7 @@ void GameLoop::GameInitialise()
 		MessageBox(NULL,L"Error loading Ball.png",L"Error",MB_OK);
 	}
 
-	//DEBUG TEXT///////////////////////////////
-	if (!verdana.loadFromFile("resources/verdana.ttf"))
-	{
-		// error...//TODO
-		MessageBox(NULL,L"Error loading verdana.ttf",L"Error",MB_OK);
-	}
+	
 
 
 	//MAP//////////////////////////////////////
@@ -78,22 +81,23 @@ void GameLoop::GameInitialise()
 	mBall->setDeltaTime(&deltaTime);
 	
 	//PLAYER///////////////////////////////////
+	mPlayerController = new PlayerController();
+
 	mPlayer = new Player(true);
-	mPlayer->Initialise(sf::Vector2f(100.0f,100.0f),sf::Color::Blue);//TODO//21-10-15//MagicNumbers
+	mPlayer->Initialise(sf::Vector2f(100.0f,100.0f),sf::Color::Magenta);//TODO//21-10-15//MagicNumbers
 	mPlayer->setTexture(mPlayertexture,false);
 	mPlayer->setOrigin((TILE_SCALE/2),(TILE_SCALE*3/4));//TODO//21-10-15//MagicNumbers
 	mPlayer->mShadow->setTexture(mShadowTexture,true);
 	mPlayer->setDeltaTime(&deltaTime);
+	mPlayer->SetInput(mPlayerController->inputToSend);
 	mPlayer->SetBall(mBall);
 	//player.setCameraPos(mainCamera.position);
+	
+	//mPlayers.push_back(mPlayer);
+	//mControllers.push_back(mPlayerController);
 
-	mPlayerRed = new Player(true);
-	mPlayerRed->Initialise(sf::Vector2f(300.0f,150.0f),sf::Color::Red);//TODO//21-10-15//MagicNumbers
-	mPlayerRed->setTexture(mPlayertexture,false);
-	mPlayerRed->setOrigin((TILE_SCALE/2),(TILE_SCALE*3/4));//TODO//21-10-15//MagicNumbers
-	mPlayerRed->mShadow->setTexture(mShadowTexture,true);
-	mPlayerRed->setDeltaTime(&deltaTime);
-	mPlayerRed->SetBall(mBall);
+	
+
 
 	//CAMERA///////////////////////////////////
 	//mainCamera.position//TODO//13-09-15//Proper initialise function
@@ -112,22 +116,59 @@ void GameLoop::GameInitialise()
 	mainView.zoom(1.0f);
 	//mainView.rotate(45);
 
-	
-	
-	
 }
 
-void GameLoop::Update(sf::RenderWindow &tempWind, sf::Clock tempClock)
+void GameLoop::SetClock(sf::Clock* tempClock)
 {
-	mPlayer->Input(mPlayerController.SendInput());
-	mPlayerRed->Input(mPlayerControllerRed.SendInput());
+	mPtrClock = tempClock;
+}
 
-	mainCamera.Input(mPlayerController.SendInput());
-	tempWind.setView(mainView);
+void GameLoop::SetWindow(sf::RenderWindow* tempWindow)
+{
+	mPtrWindow = tempWindow;
+}
+
+void GameLoop::Update()
+{
+	if(mInGame)
+	{
+		GameUpdate();
+	}
+	else
+	{
+		MenuUpdate();
+	}
+}
+
+void GameLoop::GameUpdate()
+{	
+	mPlayerController->Update();
+	
+	if(mServer)
+	{
+		//mPlayer->Input(mPlayerController->SendInput());//Change to initialising input instead of doing it everyframe
+		//mPlayerRed->Input(mNetworkPlayerController.SendInput());
+	}
+	else if(mClient)
+	{
+		PlayerController tempController;
+		tempController.state.leftStick.x=60.0f;
+		tempController.state.leftStick.y=0.0f;
+
+		tempController.state.rightStick.x=100.0f;
+		tempController.state.rightStick.y=0.0f;
+
+		//mPlayerRed->Input(tempController.SendInput());
+
+		//mPlayer->Input(mNetworkPlayerController.SendInput());
+	}
+
+	//mainCamera.Input(mPlayerController->SendInput());
+	mPtrWindow->setView(mainView);
 
 	//DELTA TIME////////////////////////////
 	prevGameTime = gameTime;
-	gameTime = tempClock.getElapsedTime();//amount of microseconds passed
+	gameTime = mPtrClock->getElapsedTime();//amount of microseconds passed
 
 	if(gameTime.asMicroseconds() > 0)
 	{
@@ -167,13 +208,13 @@ void GameLoop::Update(sf::RenderWindow &tempWind, sf::Clock tempClock)
 	
 
 	//EVENT LOOP////////////////////////////
-	EventLoop(tempWind);
+	GameEventLoop();
    
 	//UPDATES///////////////////////////////
 	//mBall->moveWorldPosition(0.01f,0.03f);
 
 	mPlayer->Update();
-	mPlayerRed->Update();
+	//mPlayerRed->Update();
 	
 	mBall->Update();
 
@@ -209,7 +250,64 @@ void GameLoop::Update(sf::RenderWindow &tempWind, sf::Clock tempClock)
 
 
 	//DRAW//////////////////////////////////
-	Draw(tempWind);
+	Draw();
+
+}
+
+void GameLoop::MenuUpdate()
+{
+	MenuEventLoop();
+
+
+	switch(mMenuState)
+	{
+	case 0://Client or server
+		if(mClient)
+		{
+			mMenuState = 2;
+		}
+		else if(mServer)
+		{
+			mMenuState = 1;
+		}
+		
+		break;
+
+	case 1://Server
+		if(mGameReady)
+		{
+			mInGame = true;
+		}
+		break;
+	case 2://Client enter serverIP
+		if(mIPReady)
+		{
+			mSocket.Initialise();
+			mSocket.SetTargetAddress((char*)mServerIP.c_str());
+
+			mMenuState = 3;
+		}
+		break;
+	case 3://Client
+		if(mGameReady)
+		{
+			mInGame = true;
+		}
+		break;
+	}
+
+
+	MenuDraw();
+
+	//DisplayText(Vector2(0.0f,0.0f),"Hello");
+	//transition
+	
+	if(mInGame)
+	{
+		GameInitialise();
+		//mInGame = true;
+	}
+	
 }
 
 void GameLoop::Collision()
@@ -218,23 +316,58 @@ void GameLoop::Collision()
 	
 }
 
-void GameLoop::Draw(sf::RenderWindow &tempWind)
+void GameLoop::MenuDraw()
+{
+	mPtrWindow->draw(DisplayText(Vector2(50.0f,25.0f),"Fütball"));
+
+	switch(mMenuState)
+	{
+	case 0:
+		mPtrWindow->draw(DisplayText(Vector2(80.0f,100.0f),"Client or Server?"));
+		mPtrWindow->draw(DisplayText(Vector2(80.0f,128.0f),"  (C)        (S)"));
+		break;
+
+	case 1://Server
+		mPtrWindow->draw(DisplayText(Vector2(80.0f,100.0f),"You are the Server"));
+		mPtrWindow->draw(DisplayText(Vector2(80.0f,128.0f),"Press ENTER to begin the game"));
+		break;
+
+	case 2://Client IP Enter
+		mPtrWindow->draw(DisplayText(Vector2(80.0f,100.0f),"You are a Client"));
+		mPtrWindow->draw(DisplayText(Vector2(80.0f,128.0f),"Server IP address (D for default)"));
+		mPtrWindow->draw(DisplayText(Vector2(80.0f,156.0f),mServerIP));
+		
+		break;
+
+	case 3://Client
+		mPtrWindow->draw(DisplayText(Vector2(80.0f,100.0f),"You are a Client"));
+		mPtrWindow->draw(DisplayText(Vector2(80.0f,128.0f),"Press ENTER to begin the game"));
+		break;
+
+
+	}
+	
+}
+
+
+void GameLoop::Draw()
 {
 
 	for(int i=0;i<EnvironmentTiles.size();i++)//TODO//11-09-15//Delete
 	{
-		tempWind.draw(EnvironmentTiles[i]);
+		mPtrWindow->draw(EnvironmentTiles[i]);
 	}
 
-	tempWind.draw(*mPlayer->mShadow);
-	tempWind.draw(*mPlayer);
+	mPtrWindow->draw(*mPlayer->mShadow);
+	mPtrWindow->draw(*mPlayer);
 
-	tempWind.draw(*mPlayerRed->mShadow);
-	tempWind.draw(*mPlayerRed);
-	//tempWind.draw(cameraTargetIcon);
+	//mPtrWindow->draw(*mPlayerRed->mShadow);
+	//mPtrWindow->draw(*mPlayerRed);
 	
-	tempWind.draw(*mBall->mShadow);
-	tempWind.draw(*mBall);
+	
+	
+	mPtrWindow->draw(*mBall->mShadow);
+	mPtrWindow->draw(*mBall);
 	
 
 	
@@ -242,26 +375,26 @@ void GameLoop::Draw(sf::RenderWindow &tempWind)
 	//UI////////////////////////////////////
 	if(paused)
 	{
-		tempWind.draw(DisplayText(Vector2(50.0f,25.0f),"Game Paused"));
+		mPtrWindow->draw(DisplayText(Vector2(50.0f,25.0f),"Game Paused"));
 	}
 
 
-	//DEBUG RAYS////////////////////////////
-
+	//DEBUG/////////////////////////////////
+	//tempWind.draw(cameraTargetIcon);
 	//DEBUG TEXT////////////////////////////
-	ShowDebug(tempWind);
+	ShowDebug();
 }
 
 //EVENT LOOP////////////////////////////
-void GameLoop::EventLoop(sf::RenderWindow &tempWind)
+void GameLoop::GameEventLoop()
 {
 	 sf::Event event;
-    while (tempWind.pollEvent(event))
+    while (mPtrWindow->pollEvent(event))
     {
 		switch(event.type)
 		{
 		case sf::Event::Closed:
-            tempWind.close();
+            mPtrWindow->close();
 			break;
 			
 			//KEYBOARD//////////////////////////////
@@ -269,7 +402,7 @@ void GameLoop::EventLoop(sf::RenderWindow &tempWind)
 
 			if(event.key.code == sf::Keyboard::Escape)
 			{
-				tempWind.close();
+				mPtrWindow->close();
 			}
 			if(event.key.code == sf::Keyboard::Space)
 			{
@@ -321,48 +454,50 @@ void GameLoop::EventLoop(sf::RenderWindow &tempWind)
 
 			if(event.key.code == sf::Keyboard::S)
 			{
-				mPlayerController.state.leftStick.x = 0.0f;
-				mPlayerController.state.leftStick.y = 100.0f;
+				mPlayerController->state.leftStick.x = 0.0f;
+				mPlayerController->state.leftStick.y = 100.0f;
 			}
 
 			if(event.key.code == sf::Keyboard::D)
 			{
-				mPlayerController.state.leftStick.x = 100.0f;
-				mPlayerController.state.leftStick.y = 0.0f;
+				mPlayerController->state.leftStick.x = 100.0f;
+				mPlayerController->state.leftStick.y = 0.0f;
 			}
 
 			if(event.key.code == sf::Keyboard::A)
 			{
-				mPlayerController.state.leftStick.x = -100.0f;
-				mPlayerController.state.leftStick.y = 0.0f;
+				mPlayerController->state.leftStick.x = -100.0f;
+				mPlayerController->state.leftStick.y = 0.0f;
 			}
 
 			if(event.key.code == sf::Keyboard::W)
 			{
-				mPlayerController.state.leftStick.x = 0.0f;
-				mPlayerController.state.leftStick.y = -100.0f;
+				mPlayerController->state.leftStick.x = 0.0f;
+				mPlayerController->state.leftStick.y = -100.0f;
 			}
 
 			if(event.key.code == sf::Keyboard::X)
 			{
-				mPlayerController.state.leftStick.x = 0.0f;
-				mPlayerController.state.leftStick.y = 0.0f;
+				mPlayerController->state.leftStick.x = 0.0f;
+				mPlayerController->state.leftStick.y = 0.0f;
 			}
 
 			break;
 
 			//CONTROLLER INPUT//////////////////////
+
+
 		case sf::Event::JoystickButtonPressed:
 			//Button Numbers
 			//A=0,B=1,X=2,Y=3,LB=4,RB=5,Back=6,Start=7,LS=8,RS=9
 			if(event.joystickButton.joystickId == 0)
 			{
-				mPlayerController.state.buttons[event.joystickButton.button] = true;
+				mPlayerController->state.buttons[event.joystickButton.button] = true;
 			}
 
 			if(event.joystickButton.joystickId == 1)
 			{
-				mPlayerControllerRed.state.buttons[event.joystickButton.button] = true;
+				//mPlayerControllerRed.state.buttons[event.joystickButton.button] = true;
 			}
 
 			break;
@@ -370,12 +505,12 @@ void GameLoop::EventLoop(sf::RenderWindow &tempWind)
 		case sf::Event::JoystickButtonReleased:
 			if(event.joystickButton.joystickId == 0)
 			{
-				mPlayerController.state.buttons[event.joystickButton.button] = false;
+				mPlayerController->state.buttons[event.joystickButton.button] = false;
 			}
 
 			if(event.joystickButton.joystickId == 1)
 			{
-				mPlayerControllerRed.state.buttons[event.joystickButton.button] = false;
+				//mPlayerControllerRed.state.buttons[event.joystickButton.button] = false;
 			}
 
 			break;
@@ -387,20 +522,20 @@ void GameLoop::EventLoop(sf::RenderWindow &tempWind)
 				//Left Stick
 				if(event.joystickMove.axis == sf::Joystick::X)
 				{
-					mPlayerController.state.leftStick.x = event.joystickMove.position;		
+					mPlayerController->state.leftStick.x = event.joystickMove.position;		
 				}
 				if(event.joystickMove.axis == sf::Joystick::Y)
 				{
-					mPlayerController.state.leftStick.y = event.joystickMove.position;		
+					mPlayerController->state.leftStick.y = event.joystickMove.position;		
 				}
 				//Right Stick
 				if(event.joystickMove.axis == sf::Joystick::U)
 				{
-					mPlayerController.state.rightStick.x = event.joystickMove.position;
+					mPlayerController->state.rightStick.x = event.joystickMove.position;
 				}
 				if(event.joystickMove.axis == sf::Joystick::R)
 				{
-					mPlayerController.state.rightStick.y = event.joystickMove.position;		
+					mPlayerController->state.rightStick.y = event.joystickMove.position;		
 				}
 			}
 
@@ -409,20 +544,20 @@ void GameLoop::EventLoop(sf::RenderWindow &tempWind)
 				//Left Stick
 				if(event.joystickMove.axis == sf::Joystick::X)
 				{
-					mPlayerControllerRed.state.leftStick.x = event.joystickMove.position;		
+					//mPlayerControllerRed.state.leftStick.x = event.joystickMove.position;		
 				}
 				if(event.joystickMove.axis == sf::Joystick::Y)
 				{
-					mPlayerControllerRed.state.leftStick.y = event.joystickMove.position;		
+					//mPlayerControllerRed.state.leftStick.y = event.joystickMove.position;		
 				}
 				//Right Stick
 				if(event.joystickMove.axis == sf::Joystick::U)
 				{
-					mPlayerControllerRed.state.rightStick.x = event.joystickMove.position;
+					//mPlayerControllerRed.state.rightStick.x = event.joystickMove.position;
 				}
 				if(event.joystickMove.axis == sf::Joystick::R)
 				{
-					mPlayerControllerRed.state.rightStick.y = event.joystickMove.position;		
+					//mPlayerControllerRed.state.rightStick.y = event.joystickMove.position;		
 				}
 			}
 			break;
@@ -433,7 +568,120 @@ void GameLoop::EventLoop(sf::RenderWindow &tempWind)
     }
 }
 
-void GameLoop::ShowDebug(sf::RenderWindow &tempWind)
+void GameLoop::MenuEventLoop()
+{
+	sf::Event event;
+    while (mPtrWindow->pollEvent(event))
+    {
+		switch(event.type)
+		{
+		case sf::Event::Closed:
+            mPtrWindow->close();
+			break;
+			
+			//KEYBOARD//////////////////////////////
+		case sf::Event::KeyPressed:
+
+			if(event.key.code == sf::Keyboard::Escape)
+			{
+				mPtrWindow->close();
+			}
+			if(event.key.code == sf::Keyboard::Return)
+			{
+				if(!mIPReady)
+				{
+					mIPReady = true;
+				}
+				else if(!mGameReady)
+				{
+					mGameReady = true;
+				}
+			}
+			if(event.key.code == sf::Keyboard::C)
+			{
+				//mClient = true;
+				mClient = true;
+			}
+			if(event.key.code == sf::Keyboard::S)
+			{
+				mServer = true;
+				mIPReady = true;	
+			}
+			if(event.key.code == sf::Keyboard::D)
+			{
+				//DefualtSettings
+				
+			}
+
+			if(event.key.code == sf::Keyboard::Num0)
+			{
+				mServerIP += "0";
+			}
+			if(event.key.code == sf::Keyboard::Num1)
+			{
+				mServerIP += "1";
+			}
+			if(event.key.code == sf::Keyboard::Num2)
+			{
+				mServerIP += "2";
+			}
+			if(event.key.code == sf::Keyboard::Num3)
+			{
+				mServerIP += "3";
+			}
+			if(event.key.code == sf::Keyboard::Num4)
+			{
+				mServerIP += "4";
+			}
+			if(event.key.code == sf::Keyboard::Num5)
+			{
+				mServerIP += "5";
+			}
+			if(event.key.code == sf::Keyboard::Num6)
+			{
+				mServerIP += "6";
+			}
+			if(event.key.code == sf::Keyboard::Num7)
+			{
+				mServerIP += "7";
+			}
+			if(event.key.code == sf::Keyboard::Num8)
+			{
+				mServerIP += "8";
+			}
+			if(event.key.code == sf::Keyboard::Num9)
+			{
+				mServerIP += "9";
+			}
+			if(event.key.code == sf::Keyboard::Period)
+			{
+				mServerIP += ".";
+			}
+
+			if(event.key.code == sf::Keyboard::Left)
+			{
+				//MenuSelectLeft
+			}
+			if(event.key.code == sf::Keyboard::Right)
+			{
+				//MenuSelectLeft
+			}
+			if(event.key.code == sf::Keyboard::Up)
+			{
+				//MenuSelectLeft
+			}
+			if(event.key.code == sf::Keyboard::Down)
+			{
+				//MenuSelectLeft
+			}
+
+			break;
+		}
+	}
+}
+
+
+void GameLoop::ShowDebug()
 {
 	if(debugMode == 0)
 	{
@@ -441,27 +689,27 @@ void GameLoop::ShowDebug(sf::RenderWindow &tempWind)
 	}
 	else if(debugMode == 1)//TODO
 	{
-		tempWind.draw(DisplayText(Vector2(0.0f,0.0f),"PlayerData"));
-		tempWind.draw(DisplayText(Vector2(0.0f,20.0f),"PlayerX",mPlayer->getPosition().x));
-		tempWind.draw(DisplayText(Vector2(0.0f,40.0f),"PlayerY",mPlayer->getPosition().y));
+		mPtrWindow->draw(DisplayText(Vector2(0.0f,0.0f),"PlayerData"));
+		mPtrWindow->draw(DisplayText(Vector2(0.0f,20.0f),"PlayerX",mPlayer->getPosition().x));
+		mPtrWindow->draw(DisplayText(Vector2(0.0f,40.0f),"PlayerY",mPlayer->getPosition().y));
 	}
 	else if(debugMode == 2)//curr FPS Debug
 	{
-		tempWind.draw(DisplayText(Vector2(0.0f,0.0f),"PerformanceData"));
-		tempWind.draw(DisplayText(Vector2(0.0f,20.0f),"FPS curr: ", (int)fpsAverage));
-		tempWind.draw(DisplayText(Vector2(0.0f,40.0f),"FrameTime: ", deltaTimeReal));
+		mPtrWindow->draw(DisplayText(Vector2(0.0f,0.0f),"PerformanceData"));
+		mPtrWindow->draw(DisplayText(Vector2(0.0f,20.0f),"FPS curr: ", (int)fpsAverage));
+		mPtrWindow->draw(DisplayText(Vector2(0.0f,40.0f),"FrameTime: ", deltaTimeReal));
 	}
 	else if(debugMode == 3)//Controller Information
 	{
-		tempWind.draw(DisplayText(Vector2(0.0f,0.0f),"ControllerData"));
-		tempWind.draw(DisplayText(Vector2(0.0f,20.0f),"JoystickX: ",mPlayerController.state.leftStick.x));
-		tempWind.draw(DisplayText(Vector2(0.0f,40.0f),"JoystickY: ",mPlayerController.state.leftStick.y));
+		mPtrWindow->draw(DisplayText(Vector2(0.0f,0.0f),"ControllerData"));
+		mPtrWindow->draw(DisplayText(Vector2(0.0f,20.0f),"JoystickX: ",mPlayerController->state.leftStick.x));
+		mPtrWindow->draw(DisplayText(Vector2(0.0f,40.0f),"JoystickY: ",mPlayerController->state.leftStick.y));
 	}
 	else if(debugMode == 4)//Camera Information
 	{
-		tempWind.draw(DisplayText(Vector2(0.0f,0.0f),"CameraData"));
-		tempWind.draw(DisplayText(Vector2(0.0f,20.0f),"CameraX",mainCamera.position.x));
-		tempWind.draw(DisplayText(Vector2(0.0f,40.0f),"CameraY",mainCamera.position.y));
+		mPtrWindow->draw(DisplayText(Vector2(0.0f,0.0f),"CameraData"));
+		mPtrWindow->draw(DisplayText(Vector2(0.0f,20.0f),"CameraX",mainCamera.position.x));
+		mPtrWindow->draw(DisplayText(Vector2(0.0f,40.0f),"CameraY",mainCamera.position.y));
 	}
 	else
 	{

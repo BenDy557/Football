@@ -90,6 +90,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="Socket.cpp" />
     <ClCompile Include="Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +104,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="Socket.h" />
     <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <ItemGroup>

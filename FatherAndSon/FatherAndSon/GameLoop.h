@@ -1,7 +1,8 @@
 #ifndef _GAME_LOOP_H
 #define _GAME_LOOP_H
 
-#include <Windows.h>
+
+//#include <Windows.h>
 #include <string>
 #include <sstream>
 #include <vector>
@@ -11,7 +12,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
-
+#include "Socket.h"
 #include "globals.h"
 
 //GAME INCLUDES/////////////////////////
@@ -30,6 +31,8 @@ public:
 	GameLoop()
 		:aiThread(&GameLoop::AIUpdate,this)
 	{
+		mInGame = false;
+		mGameReady = false;
 		gameTime = prevGameTime = gameTime.Zero;
 		timeScale = 1.0f;
 		paused = false;//TODO//13-09-15//
@@ -37,22 +40,37 @@ public:
 		deltaTime = 0.0f;
 		frameCount = 0;
 		debugMode = 0;
-		GameInitialise();
+
+		mMenuState = 0;
+		mClient = false;
+		mServer = false;
+		mIPReady = false;
+		mServerIP = "";
+		
+		LoadTextures();
 	}
+	//~GameLoop();
 
 	void GameInitialise();
-	void SetWindow(sf::RenderWindow &tempWind);
-	void Update(sf::RenderWindow &tempWind,sf::Clock tempClock);
+	void SetWindow(sf::RenderWindow* tempWind);
+	void SetClock(sf::Clock* tempClock);
+	void Update();
+	void MenuUpdate();
+	void GameUpdate();
 	void AIUpdate();
 	//void Draw();
 private:
-	void EventLoop(sf::RenderWindow &tempWind);
-	void ShowDebug(sf::RenderWindow &tempWind);
+	void LoadTextures();
+	void GameEventLoop();
+	void MenuEventLoop();
+
+	void ShowDebug();
 	sf::Text DisplayText(Vector2 positionIn,std::string phraseIn, float valueIn);
 	sf::Text DisplayText(Vector2 positionIn,std::string phraseIn);
 	void ResolveBulletPlayerCollision();
 	void Collision();
-	void Draw(sf::RenderWindow &tempWind);
+	void MenuDraw();
+	void Draw();
 
 	void Reset();
 	void Pause();
@@ -61,6 +79,20 @@ private:
 public:
 
 private:
+	bool mInGame;
+	bool mGameReady;
+	bool mIPReady;
+	int mMenuState;
+	bool mClient;
+	bool mServer;
+	std::string mServerIP;
+	Socket mSocket;
+	char* mNetworkData;//Networking data in/out
+	int mMaxPlayers;
+
+	sf::Clock* mPtrClock;
+	sf::RenderWindow* mPtrWindow;
+
 	sf::Thread aiThread;
 	sf::Time gameTime;
 	sf::Time prevGameTime;
@@ -69,8 +101,6 @@ private:
 	float timeScale;//game seconds per real second
 	
 	bool paused;
-	bool twoPlayer;
-	bool aiVersus;
 
 	//Fonts
 	sf::Font verdana;
@@ -110,12 +140,20 @@ private:
 	std::vector<GameObjectIso> EnvironmentTiles;//TODO//20-10-2015//Change to Mapgrid instead of gameobject vector
 	MapGrid EnvironmentTileGrid;//TODO//23-10-2015//make exist
 		
-	//Players
+	
+	//MainPlayer
 	Player* mPlayer;
-	PlayerController mPlayerController;
+	PlayerController* mPlayerController;
 
+
+	//Players
+	std::vector<Player*> mPlayers;
+	std::vector<PlayerController*> mControllers;
+
+	/*
 	Player* mPlayerRed;
 	PlayerController mPlayerControllerRed;
+	*/
 	
 
 	

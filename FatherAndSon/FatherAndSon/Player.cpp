@@ -8,7 +8,8 @@ Player::Player(bool hasShadowIn):
 	mPtrBall = nullptr;
 
 	//setSize(sf::Vector2f(20.0f,20.0f));
-	setColor(blue);
+	mPlayerNumber = 0;
+	setColor(sf::Color::Magenta);
 
 	mSpriteSheetMax.x = 4;
 	mSpriteSheetMax.y = 4;
@@ -27,15 +28,17 @@ Player::Player(bool hasShadowIn):
 	//setPosition(200.0f,200.0f);
 	//setOrigin(getRadius(),getRadius());//TODO
 
-	inputState.actions[0]=false;
-	inputState.actions[1]=false;
-	inputState.actions[2]=false;
-	inputState.actions[3]=false;
-	inputState.actions[4]=false;
-	inputState.aimingBearing = 0.0f;
-	inputState.aimingIntesity = 0.0f;
-	inputState.movementBearing = 0.0f;
-	inputState.movementIntensity = 0.0f;
+	//ptrInputState = PlayerInput();
+	ptrInputState = new PlayerInput();
+	ptrInputState->actions[0]=false;
+	ptrInputState->actions[1]=false;
+	ptrInputState->actions[2]=false;
+	ptrInputState->actions[3]=false;
+	ptrInputState->actions[4]=false;
+	ptrInputState->aimingBearing = 0.0f;
+	ptrInputState->aimingIntesity = 0.0f;
+	ptrInputState->movementBearing = 0.0f;
+	ptrInputState->movementIntensity = 0.0f;
 
 	
 	accelerationForce = accelerationForceDefault;
@@ -62,7 +65,6 @@ void Player::Initialise(sf::Vector2f positionIn,sf::Color colorIn)
 {
 	setColor(colorIn);
 	setPosition(positionIn); 
-	
 
 	//positionVelocityRay.Update(ConvertSFVector2(getPosition()),ConvertSFVector2(getPosition())+(velocity* *ptrDeltaTime));
 	//positionVelocityRay.setDebugDrawScale(10.0f);
@@ -71,38 +73,34 @@ void Player::Initialise(sf::Vector2f positionIn,sf::Color colorIn)
 
 void Player::Update()//TODO//14-09-15//Overwrites GameObjectIso update
 {
+	while(ptrInputState->movementBearing>360)
+	{
+		ptrInputState->movementBearing -= 360;
+	}
+	
+	while(ptrInputState->movementBearing<0)
+	{
+		ptrInputState->movementBearing += 360;
+	}
+
 	Actions();
 	Movement();
 	
 	GameObjectIso::Update();
+
+	Collision();
 }
 
 
-void Player::Input(PlayerInput &tempInput)
-{
-	//Replaces last frames input struct with most recent
-	inputState = tempInput;
-
-	while(inputState.movementBearing>360)
-	{
-		inputState.movementBearing -= 360;
-	}
-	
-	while(inputState.movementBearing<0)
-	{
-		inputState.movementBearing += 360;
-	}
-	
-}
 
 void Player::Movement()
 {
-	if(inputState.movementIntensity>=deadZone)
+	if(ptrInputState->movementIntensity>=deadZone)
 	{
-		float accelerationModifier = inputState.movementIntensity * accelerationForce;
+		float accelerationModifier = ptrInputState->movementIntensity * accelerationForce;
 		
-		acceleration.x=-accelerationModifier*sin((inputState.movementBearing+180)*(M_PI/180.0f));
-		acceleration.y=accelerationModifier*cos((inputState.movementBearing+180)*(M_PI/180.0f));
+		acceleration.x=-accelerationModifier*sin((ptrInputState->movementBearing+180)*(M_PI/180.0f));
+		acceleration.y=accelerationModifier*cos((ptrInputState->movementBearing+180)*(M_PI/180.0f));
 		
 		lastMovementBearing = getMovementBearing();
 	}
@@ -122,35 +120,19 @@ void Player::Movement()
 	//friction
 	velocity = velocity - (velocity*(frictionCoefficient * *ptrDeltaTime));
 
-	if(velocity.Get_magnitude()>=maxVelocity)
-	{
-		acceleration = 0;
-	}
-	else
+	if(velocity.Get_magnitude()<maxVelocity)
 	{
 		velocity = velocity + (acceleration* *ptrDeltaTime);
 	}
+	else
+	{
+		//MaxVelocity	
+	}
 
 	
-	if(getWorldPositionZ() < 0.0f)
-	{
-		setWorldPositionZ(0.0f);
-		mGrounded = true;
-	}
-	else
-	{
-		mGrounded = false;
-	}
+	
 
-	//Gravity
-	if(!mGrounded)
-	{
-		mZVelocity -= mGravity* *ptrDeltaTime;
-	}
-	else
-	{
-		mKickReady = true;
-	}
+	
 
 	
 
@@ -173,15 +155,43 @@ void Player::Actions()
 	//ACTION STATE//////////////////////////
 	//set up action triggers
 
-	if(inputState.actions[1])
+	if(ptrInputState->actions[1])
 	{
 		Jump();
 	}
-	if(inputState.actions[3])
+	if(ptrInputState->actions[3])
 	{
 		Kick();
 	}
+	if(ptrInputState->actions[2])
+	{
+		Chip();
+	}
 	
+}
+
+void Player::Collision()
+{
+	if(getWorldPositionZ() < 0.0f)
+	{
+		setWorldPositionZ(0.0f);
+		mGrounded = true;
+	}
+	else
+	{
+		mGrounded = false;
+	}
+
+
+	//Gravity
+	if(!mGrounded)
+	{
+		mZVelocity -= mGravity* *ptrDeltaTime;
+	}
+	else
+	{
+		mKickReady = true;
+	}
 }
 
 void Player::Jump()
@@ -194,44 +204,61 @@ void Player::Jump()
 
 void Player::Kick()
 {
-	if(mGrounded)
+	if(mKickReady)
 	{
-		mZVelocity = 2.5f;
-		mKickReady = false;
-
-		//Chip
+		//BOOT IT!
 		if(abs((mPtrBall->getWorldPosition().Get_magnitude() - getWorldPosition().Get_magnitude()))<mKickDistance
-			&& abs(mPtrBall->getWorldPositionZ()-getWorldPositionZ())<mVerticalKickDistance)
+		&& abs(mPtrBall->getWorldPositionZ()-getWorldPositionZ())<mVerticalKickDistance)
 		{	
-			mPtrBall->IncrementVelocity(acceleration*0.3f,0.0f);
+			//mPtrBall->IncrementVelocity((acceleration*0.3f)+(velocity*0.25f),mPtrBall->GetVelocityZ()/2.0f);
+			mPtrBall->SetVelocity((acceleration*0.6f)+(velocity*0.25f),mPtrBall->GetVelocityZ()/2.0f);
+			//mPtrBall->IncrementVelocity((acceleration*0.3f)+(velocity*0.25f),0.0f);
 		}
-		
-	}
-	else if(mKickReady)//if in air and havent kicked already
-	{
+
+		if(mGrounded)
+		{
+			mZVelocity = 2.5f;
+		}
+		else//if in air and havent kicked already
+		{
+			mZVelocity = 1.0f;
+		}
 		
 		mKickReady = false;
+	}
+	
+}
 
+void Player::Chip()
+{
+	if(mKickReady)
+	{
 		if(abs((mPtrBall->getWorldPosition().Get_magnitude() - getWorldPosition().Get_magnitude()))<mKickDistance
-			&& abs(mPtrBall->getWorldPositionZ()-getWorldPositionZ())<mVerticalKickDistance)
+		&& abs(mPtrBall->getWorldPositionZ()-getWorldPositionZ())<mVerticalKickDistance)
 		{
-			if(mZVelocity>0)
-			{
-				mPtrBall->IncrementVelocity(acceleration*0.4f,7.0f);
-			}
-			else
-			{
-				mPtrBall->IncrementVelocity(acceleration*0.4f,-3.0f);
-			}
+			//mPtrBall->IncrementVelocity((acceleration*0.1f),2.0f);
+			mPtrBall->SetVelocity(mPtrBall->GetVelocity()*0.5f,4.0f);
+			
 		}
 
-		mZVelocity = 1.0f;
+		if(mGrounded)
+		{
+			mZVelocity = 2.5f;
+			mKickReady = false;
+
+		}
+		else
+		{	
+			mZVelocity = 1.0f;
+			mKickReady = false;
+		}
+
+		mKickReady = false;
 	}
 }
 
 void Player::SpriteAnimation()
 {
-	
 	mFrameTimeMax = 0.15f;
 	mFrameTimeMax = 1.0f/(velocity.Get_magnitude()*2.0f);
 
@@ -411,17 +438,17 @@ bool Player::CheckBoxCollide(sf::RectangleShape boundingBoxIn)
 //Getters and Setters
 float Player::getMovementBearing()
 {
-	return inputState.movementBearing;
+	return ptrInputState->movementBearing;
 }
 
 void Player::setMovementBearing(float degreesIn)//TODO//Should this functions exist?
 {
-	inputState.movementBearing = degreesIn;
+	ptrInputState->movementBearing = degreesIn;
 }
 
 float Player::getMovementIntensity()
 {
-	return inputState.movementIntensity;
+	return ptrInputState->movementIntensity;
 }
 
 void Player::setMovementIntensity(float intensityScaleIn)//TODO//OLD//Should this functions exist?
@@ -432,17 +459,17 @@ void Player::setMovementIntensity(float intensityScaleIn)//TODO//OLD//Should thi
 
 float Player::getAimingBearing()
 {
-	return inputState.aimingBearing;
+	return ptrInputState->aimingBearing;
 }
 
 void Player::setAimingBearing(float degreesIn)//TODO//OLD//Should this functions exist?
 {
-	inputState.aimingBearing = degreesIn;
+	ptrInputState->aimingBearing = degreesIn;
 }
 
 float Player::getAimingIntensity()
 {
-	return inputState.aimingIntesity;
+	return ptrInputState->aimingIntesity;
 }
 
 float Player::getDeadZone()
@@ -469,6 +496,11 @@ float Player::getVelocityMagnitude()
 void Player::setDeltaTime(float *deltaTimeIn)
 {
 	ptrDeltaTime = deltaTimeIn;
+}
+
+void Player::SetInput(PlayerInput* playerInputIn)
+{
+	ptrInputState = playerInputIn;
 }
 
 void Player::SetBall(Ball *ballIn)
