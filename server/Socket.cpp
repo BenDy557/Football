@@ -152,6 +152,7 @@ int Socket::Receive(char*& dataOut)
 
 	if (count == SOCKET_ERROR)
 	{
+		/*
 		if (WSAGetLastError() == WSAWOULDBLOCK)
 		{    
 			// recv would have blocked,    
@@ -165,6 +166,7 @@ int Socket::Receive(char*& dataOut)
 			fprintf(stderr, "Error: %s\n", "WSAStartup failed");
 			exit(1);
 		}
+		*/
 	}
 	else 
 	{  

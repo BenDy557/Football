@@ -15,6 +15,9 @@
 #define MESSAGESIZE_MAX 65507//MAX message size
 #define MESSAGESIZE 16
 
+//ERROR CODES
+#define WSAEWOULDBLOCK 10035
+
 
 #include <WinSock2.h>
 #pragma comment(lib, "ws2_32.lib")
@@ -40,6 +43,7 @@ public:
 	void Shutdown();
 
 	void SetBuffer(char* bufferIn);
+	void ClearBuffers();
 
 	int Send();
 	int SendEcho();

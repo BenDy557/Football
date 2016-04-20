@@ -44,6 +44,7 @@ void Socket::Initialise()
 		if((PORTNUMBERMIN+tempPortIncrement) > PORTNUMBERMAX)
 		{
 			//die("Ports unavailable");//TODO//ReplaceDie
+			MessageBox(NULL,L"Error Ports unavailable",L"Error",MB_OK);
 			return;
 		}
 	}
@@ -56,6 +57,7 @@ void Socket::InitialiseServerSocket()
 	if(!SocketSetUp(SOCK_DGRAM,SERVERIP,SERVERPORT,tempPortIncrement))
 	{
 		//die("Ports unavailable");//TODO//ReplaceDie
+		MessageBox(NULL,L"Error Ports unavailable",L"Error",MB_OK);
 	}
 }
 void Socket::Initialise(char* currentIPIn)
@@ -92,8 +94,8 @@ bool Socket::SocketSetUp(int socketTypeIn,char* currentIPIn,int serverPortMin,in
 	
 
 
-	bool blockingIn = true;
-	if(blockingIn)
+	bool nonBlockingIn = true;
+	if(nonBlockingIn)
 	{
 		u_long value = 1;//0 for blocking !0 for non-blocking
 		ioctlsocket(m_Socket, FIONBIO, &value);
@@ -143,21 +145,18 @@ int Socket::Receive(char*& dataOut)
 
 	if (count == SOCKET_ERROR)
 	{
-		/*
-		if (WSAGetLastError() == WSAWOULDBLOCK)
+		int errorCode = WSAGetLastError();
+		
+		if (errorCode == WSAEWOULDBLOCK)
 		{    
 			// recv would have blocked,    
-			// i.e. there's no data to read  
-			printf("Error: %s\n", "WSAWOULDBLOCK");
-			
+			//MessageBox(NULL,L"Error WSAEWOULDBLOCK",L"Error",MB_OK);
 		} 
 		else 
 		{  
-			// some other error occurred  
-			fprintf(stderr, "Error: %s\n", "WSAStartup failed");
+			MessageBox(NULL,L"FatalError networking things went wrong",L"Error",MB_OK);
 			exit(1);
-		}
-		*/
+		}	
 	}
 	else 
 	{  
@@ -165,11 +164,12 @@ int Socket::Receive(char*& dataOut)
 	}
 
 	
-
+	/*
 	printf("Received %d bytes from address %s port %d: '",
 		count, inet_ntoa(m_SentFromAddress->sin_addr), ntohs(m_SentFromAddress->sin_port));
 		fwrite(m_BufferReceived, 1, count, stdout);
 		printf("'\n");
+		*/
 
 	dataOut = m_BufferReceived;
 
@@ -180,7 +180,7 @@ int Socket::Send()
 {
 	//m_SendToAddress = m_SentFromAddress;
 
-	printf("Sending message to %s %d \n",inet_ntoa(m_SendToAddress->sin_addr),ntohs(m_SendToAddress->sin_port));
+	//printf("Sending message to %s %d \n",inet_ntoa(m_SendToAddress->sin_addr),ntohs(m_SendToAddress->sin_port));
 	int count = sendto(m_Socket, m_BufferToSend, m_MessageSize, 0,
 		   (const sockaddr*) m_SendToAddress, sizeof(*m_SendToAddress));
 		   
@@ -189,7 +189,7 @@ int Socket::Send()
 
 int Socket::SendEcho()
 {
-	printf("Sending Echo message to %s %d \n",inet_ntoa(m_SentFromAddress->sin_addr),ntohs(m_SentFromAddress->sin_port));
+	//printf("Sending Echo message to %s %d \n",inet_ntoa(m_SentFromAddress->sin_addr),ntohs(m_SentFromAddress->sin_port));
 	int count = sendto(m_Socket, m_BufferToSend, m_MessageSize, 0,
 		   (const sockaddr *) m_SentFromAddress, sizeof(*m_SentFromAddress));
 		   
@@ -208,6 +208,16 @@ void Socket::SetBuffer(char* bufferIn)
 		m_BufferToSend[i] = bufferIn[i];
 	}
 	
+}
+
+void Socket::ClearBuffers()
+{
+	memset(m_BufferReceived,'-',MESSAGESIZE);
+	m_BufferReceived[MESSAGESIZE-1] = '\0';
+
+	memset(m_BufferToSend,'-',MESSAGESIZE);
+	m_BufferToSend[MESSAGESIZE-1] = '\0';
+		
 }
 
 

@@ -9,6 +9,7 @@ void GameLoop::LoadTextures()
 		MessageBox(NULL,L"Error loading verdana.ttf",L"Error",MB_OK);
 	}
 }
+
 void GameLoop::GameInitialise()
 {
 	//TEXTURE LOADING//////////////////////////
@@ -43,7 +44,6 @@ void GameLoop::GameInitialise()
 	}
 
 	
-
 
 	//MAP//////////////////////////////////////
 	//TODO//11-09-15//Loop and generate map
@@ -80,11 +80,12 @@ void GameLoop::GameInitialise()
 	mBall->mShadow->setTexture(mShadowTexture,true);
 	mBall->setDeltaTime(&deltaTime);
 	
+
 	//PLAYER///////////////////////////////////
 	mPlayerController = new PlayerController();
 
 	mPlayer = new Player(true);
-	mPlayer->Initialise(sf::Vector2f(100.0f,100.0f),sf::Color::Magenta);//TODO//21-10-15//MagicNumbers
+	mPlayer->Initialise(sf::Vector2f(100.0f,100.0f),sf::Color::Color(255.0f,0.0f,255.0f,255.0f));//TODO//21-10-15//MagicNumbers
 	mPlayer->setTexture(mPlayertexture,false);
 	mPlayer->setOrigin((TILE_SCALE/2),(TILE_SCALE*3/4));//TODO//21-10-15//MagicNumbers
 	mPlayer->mShadow->setTexture(mShadowTexture,true);
@@ -93,7 +94,11 @@ void GameLoop::GameInitialise()
 	mPlayer->SetBall(mBall);
 	//player.setCameraPos(mainCamera.position);
 	
-	//mPlayers.push_back(mPlayer);
+	if(mServer)
+	{
+		mPlayers.push_back(mPlayer);
+	}
+	
 	//mControllers.push_back(mPlayerController);
 
 	
@@ -213,7 +218,12 @@ void GameLoop::GameUpdate()
 	//UPDATES///////////////////////////////
 	//mBall->moveWorldPosition(0.01f,0.03f);
 
-	mPlayer->Update();
+	for (std::list<Player*>::iterator it = mPlayers.begin(); it != mPlayers.end(); it++)
+	{
+		(*it)->Update();
+	}
+
+	//mPlayer->Update();
 	//mPlayerRed->Update();
 	
 	mBall->Update();
@@ -265,15 +275,35 @@ void GameLoop::MenuUpdate()
 		if(mClient)
 		{
 			mMenuState = 2;
+
+			
 		}
 		else if(mServer)
 		{
 			mMenuState = 1;
+
+			//SERVER SOCKET SETUP
+			mSocket->InitialiseServerSocket();
+			mSocket->ClearBuffers();
+
+			
 		}
 		
 		break;
 
 	case 1://Server
+		
+		if(mSocket->Receive(mNetworkData)==-1)
+		{
+			//Would block
+		}
+		else
+		{
+			//read message
+			//mNetworkData
+			
+		}
+
 		if(mGameReady)
 		{
 			mInGame = true;
@@ -282,13 +312,37 @@ void GameLoop::MenuUpdate()
 	case 2://Client enter serverIP
 		if(mIPReady)
 		{
-			mSocket.Initialise();
-			mSocket.SetTargetAddress((char*)mServerIP.c_str());
+			//CLIENT SOCKET SETUP
+			mSocket->Initialise();
+			mSocket->SetTargetAddress((char*)mServerIP.c_str());
+			mSocket->ClearBuffers();
+
+			mSocket->SetBuffer("hello there");
+			
+			
+			if(mSocket->Send()==-1)
+			{
+				MessageBox(NULL,L"Error Sending Message to Server",L"Error",MB_OK);
+			}
+			
+			
+			//Sleep(5000);
+
+			/*
+			if(mSocket->Receive(mNetworkData)==-1)
+			{
+				MessageBox(NULL,L"Error Receiving Message from Server",L"Error",MB_OK);
+			}
+			*/
+
 
 			mMenuState = 3;
 		}
 		break;
 	case 3://Client
+
+		//Connect to server
+
 		if(mGameReady)
 		{
 			mInGame = true;
@@ -349,7 +403,6 @@ void GameLoop::MenuDraw()
 	
 }
 
-
 void GameLoop::Draw()
 {
 
@@ -358,11 +411,15 @@ void GameLoop::Draw()
 		mPtrWindow->draw(EnvironmentTiles[i]);
 	}
 
-	mPtrWindow->draw(*mPlayer->mShadow);
-	mPtrWindow->draw(*mPlayer);
+	//mPtrWindow->draw(*mPlayer->mShadow);
+	//mPtrWindow->draw(*mPlayer);
 
-	//mPtrWindow->draw(*mPlayerRed->mShadow);
-	//mPtrWindow->draw(*mPlayerRed);
+	for (std::list<Player*>::iterator it = mPlayers.begin(); it != mPlayers.end(); it++)
+	{
+		mPtrWindow->draw(*(*it)->mShadow);
+		mPtrWindow->draw(*(*it));
+	}
+
 	
 	
 	
@@ -388,7 +445,7 @@ void GameLoop::Draw()
 //EVENT LOOP////////////////////////////
 void GameLoop::GameEventLoop()
 {
-	 sf::Event event;
+	sf::Event event;
     while (mPtrWindow->pollEvent(event))
     {
 		switch(event.type)
@@ -413,6 +470,12 @@ void GameLoop::GameEventLoop()
 				Reset();
 			}
 
+
+			if(event.key.code == sf::Keyboard::P)
+			{
+				SpawnPlayer(mPlayerController);
+			}
+
 			if(event.key.code == sf::Keyboard::Num0)
 			{
 				debugMode = 0;
@@ -433,54 +496,7 @@ void GameLoop::GameEventLoop()
 			{
 				debugMode = 4;
 			}
-
-			//TODO//11-09-15//Camera controller properly
-			if(event.key.code == sf::Keyboard::Up)
-			{
-				//mainCamera.Move(0);
-			}
-			if(event.key.code == sf::Keyboard::Right)
-			{
-				//mainCamera.Move(1);
-			}
-			if(event.key.code == sf::Keyboard::Down)
-			{
-				//mainCamera.Move(2);
-			}
-			if(event.key.code == sf::Keyboard::Left)
-			{
-				//mainCamera.Move(3);
-			}
-
-			if(event.key.code == sf::Keyboard::S)
-			{
-				mPlayerController->state.leftStick.x = 0.0f;
-				mPlayerController->state.leftStick.y = 100.0f;
-			}
-
-			if(event.key.code == sf::Keyboard::D)
-			{
-				mPlayerController->state.leftStick.x = 100.0f;
-				mPlayerController->state.leftStick.y = 0.0f;
-			}
-
-			if(event.key.code == sf::Keyboard::A)
-			{
-				mPlayerController->state.leftStick.x = -100.0f;
-				mPlayerController->state.leftStick.y = 0.0f;
-			}
-
-			if(event.key.code == sf::Keyboard::W)
-			{
-				mPlayerController->state.leftStick.x = 0.0f;
-				mPlayerController->state.leftStick.y = -100.0f;
-			}
-
-			if(event.key.code == sf::Keyboard::X)
-			{
-				mPlayerController->state.leftStick.x = 0.0f;
-				mPlayerController->state.leftStick.y = 0.0f;
-			}
+			
 
 			break;
 
@@ -610,7 +626,7 @@ void GameLoop::MenuEventLoop()
 			if(event.key.code == sf::Keyboard::D)
 			{
 				//DefualtSettings
-				
+				mServerIP = "127.0.0.1";
 			}
 
 			if(event.key.code == sf::Keyboard::Num0)
@@ -680,7 +696,6 @@ void GameLoop::MenuEventLoop()
 	}
 }
 
-
 void GameLoop::ShowDebug()
 {
 	if(debugMode == 0)
@@ -725,6 +740,23 @@ void GameLoop::ShowDebug()
 void GameLoop::AIUpdate()
 {
 	//TODO
+}
+
+void GameLoop::SpawnPlayer(PlayerController* ptrPlayerControllerIn)
+{
+	Player* tempPlayer;
+	tempPlayer = new Player(true);
+
+	tempPlayer->Initialise(sf::Vector2f(100.0f,100.0f),sf::Color::White);//TODO//21-10-15//MagicNumbers	
+	tempPlayer->setTexture(mPlayertexture,false);
+	tempPlayer->setOrigin((TILE_SCALE/2),(TILE_SCALE*3/4));//TODO//21-10-15//MagicNumbers
+	tempPlayer->mShadow->setTexture(mShadowTexture,true);
+	tempPlayer->setDeltaTime(&deltaTime);
+	tempPlayer->SetInput(ptrPlayerControllerIn->inputToSend);
+	tempPlayer->SetBall(mBall);
+
+
+	mPlayers.push_back(tempPlayer);
 }
 
 sf::Text GameLoop::DisplayText(Vector2 positionIn, std::string phraseIn, float valueIn)

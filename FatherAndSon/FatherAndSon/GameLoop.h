@@ -47,6 +47,12 @@ public:
 		mIPReady = false;
 		mServerIP = "";
 		
+		mNetworkData = new char;
+		memset(mNetworkData,'-',MESSAGESIZE);
+		mNetworkData[MESSAGESIZE-1] = '\0';
+		
+		mSocket = new Socket();
+		
 		LoadTextures();
 	}
 	//~GameLoop();
@@ -75,6 +81,8 @@ private:
 	void Reset();
 	void Pause();
 
+	void SpawnPlayer(PlayerController* ptrPlayerControllerIn);
+
 //VARIABLES
 public:
 
@@ -83,11 +91,15 @@ private:
 	bool mGameReady;
 	bool mIPReady;
 	int mMenuState;
+	
+	//NETWORKING//////////
 	bool mClient;
 	bool mServer;
 	std::string mServerIP;
-	Socket mSocket;
+	Socket* mSocket;
 	char* mNetworkData;//Networking data in/out
+
+
 	int mMaxPlayers;
 
 	sf::Clock* mPtrClock;
@@ -147,8 +159,8 @@ private:
 
 
 	//Players
-	std::vector<Player*> mPlayers;
-	std::vector<PlayerController*> mControllers;
+	std::list<Player*> mPlayers;
+	std::list<PlayerController*> mControllers;
 
 	/*
 	Player* mPlayerRed;

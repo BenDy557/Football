@@ -1,31 +1,32 @@
-﻿Build started 24/03/2016 11:45:09.
-     1>Project "M:\Masters\NetworkGameDevelopment\2016-01-28\server\server.vcxproj" on node 2 (build target(s)).
+﻿Build started 20/04/2016 16:15:58.
+     1>Project "M:\Masters\NetworkGameDevelopment\Coursework\Football\server\server.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
-         Creating ".\Debug\server.unsuccessfulbuild" because "AlwaysCreate" was specified.
+         Touching ".\Debug\server.unsuccessfulbuild".
        ClCompile:
-         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Debug/" /Fd".\Debug/vc100.pdb" /Gd /TP /analyze- /errorReport:prompt GameLoop.cpp
-         GameLoop.cpp
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Debug/" /Fd".\Debug/vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Socket.cpp
+         Socket.cpp
+     1>m:\masters\networkgamedevelopment\coursework\football\server\socket.cpp(133): warning C4715: 'Socket::SocketSetUp' : not all control paths return a value
        ManifestResourceCompile:
-         c:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo".\Debug\server.exe.embed.manifest.res" .\Debug\server_manifest.rc 
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo".\Debug\server.exe.embed.manifest.res" .\Debug\server_manifest.rc 
        Link:
-         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Debug/server.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:".\Debug\server.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:".\Debug/server.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\Debug\server.lib" /MACHINE:X86 .\Debug\server.exe.embed.manifest.res
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Debug/server.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:".\Debug\server.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:".\Debug/server.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\Debug\server.lib" /MACHINE:X86 .\Debug\server.exe.embed.manifest.res
          .\Debug/GameLoop.obj
          .\Debug/main.obj
          .\Debug/Socket.obj
        Manifest:
-         c:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:".\Debug\server.exe.embed.manifest" /manifest .\Debug\server.exe.intermediate.manifest
-         c:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo".\Debug\server.exe.embed.manifest.res" .\Debug\server_manifest.rc 
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:".\Debug\server.exe.embed.manifest" /manifest .\Debug\server.exe.intermediate.manifest
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo".\Debug\server.exe.embed.manifest.res" .\Debug\server_manifest.rc 
        LinkEmbedManifest:
-         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Debug/server.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:".\Debug\server.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:".\Debug/server.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\Debug\server.lib" /MACHINE:X86 .\Debug\server.exe.embed.manifest.res
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Debug/server.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:".\Debug\server.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:".\Debug/server.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\Debug\server.lib" /MACHINE:X86 .\Debug\server.exe.embed.manifest.res
          .\Debug/GameLoop.obj
          .\Debug/main.obj
          .\Debug/Socket.obj
-         server.vcxproj -> M:\Masters\NetworkGameDevelopment\2016-01-28\server\.\Debug\server.exe
+         server.vcxproj -> M:\Masters\NetworkGameDevelopment\Coursework\Football\server\.\Debug\server.exe
        FinalizeBuildStatus:
          Deleting file ".\Debug\server.unsuccessfulbuild".
          Touching ".\Debug\server.lastbuildstate".
-     1>Done Building Project "M:\Masters\NetworkGameDevelopment\2016-01-28\server\server.vcxproj" (build target(s)).
+     1>Done Building Project "M:\Masters\NetworkGameDevelopment\Coursework\Football\server\server.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.20
+Time Elapsed 00:00:02.80

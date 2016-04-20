@@ -96,4 +96,14 @@ const sf::Color playerOOS(0.0f,164.0f,164.0f);
 const sf::Color floorColor(100.0f,100.0f,100.0f);
 const sf::Color wallColor(36.0f,82.0f,36.0f);
 
+enum PacketType{playerInput,playerData,ballData};
+
+struct LocomotionData
+{
+	Vector2 mPosition;
+	float mPositionZ;
+	Vector2 mVelocity;
+	float mVelocityZ;
+};
+
 #endif
