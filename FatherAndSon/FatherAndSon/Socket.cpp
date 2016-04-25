@@ -28,11 +28,16 @@ Socket::~Socket()
 	delete m_SendToAddress;
 	m_SendToAddress = nullptr;
 
-	delete m_BufferToSend;
-	m_BufferToSend = nullptr;
+	if(m_BufferToSend)
+	{
+		delete m_BufferToSend;
+		m_BufferToSend = nullptr;
+	}
 
 	delete m_BufferReceived;
 	m_BufferReceived = nullptr;
+
+	WSACleanup();
 }
 
 void Socket::Initialise()
@@ -88,6 +93,10 @@ bool Socket::SocketSetUp(int socketTypeIn,char* currentIPIn,int serverPortMin,in
 		exit(1);
 	}
 
+	w.lpVendorInfo = new char FAR;
+	w.lpVendorInfo = "hello";
+
+
 	//Create The Server Socket
 	m_Socket = socket(AF_INET, socketTypeIn, 0);
 	
@@ -119,9 +128,6 @@ bool Socket::SocketSetUp(int socketTypeIn,char* currentIPIn,int serverPortMin,in
 	// ntohs does the opposite of htons.
 	printf("socket bound to port %d\n", ntohs(tempSockAddr.sin_port));
 
-	m_BufferToSend = new char;
-	m_BufferReceived = new char;
-
 
 }
 
@@ -150,7 +156,7 @@ int Socket::Receive(char*& dataOut)
 		if (errorCode == WSAEWOULDBLOCK)
 		{    
 			// recv would have blocked,    
-			//MessageBox(NULL,L"Error WSAEWOULDBLOCK",L"Error",MB_OK);
+			memset(m_BufferReceived,'-',m_MessageSize);
 		} 
 		else 
 		{  
@@ -164,14 +170,7 @@ int Socket::Receive(char*& dataOut)
 	}
 
 	
-	/*
-	printf("Received %d bytes from address %s port %d: '",
-		count, inet_ntoa(m_SentFromAddress->sin_addr), ntohs(m_SentFromAddress->sin_port));
-		fwrite(m_BufferReceived, 1, count, stdout);
-		printf("'\n");
-		*/
-
-	dataOut = m_BufferReceived;
+	memcpy(dataOut,m_BufferReceived, m_MessageSize);
 
 	return count;
 }

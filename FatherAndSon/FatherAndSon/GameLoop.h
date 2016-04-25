@@ -47,15 +47,17 @@ public:
 		mIPReady = false;
 		mServerIP = "";
 		
-		mNetworkData = new char;
-		memset(mNetworkData,'-',MESSAGESIZE);
+		mNetworkData = new char[MESSAGESIZE];
+		memset(mNetworkData,'p',MESSAGESIZE);
 		mNetworkData[MESSAGESIZE-1] = '\0';
 		
+		mCurrentPlayersAmount = 0;
+
 		mSocket = new Socket();
 		
 		LoadTextures();
 	}
-	//~GameLoop();
+	~GameLoop();
 
 	void GameInitialise();
 	void SetWindow(sf::RenderWindow* tempWind);
@@ -83,6 +85,12 @@ private:
 
 	void SpawnPlayer(PlayerController* ptrPlayerControllerIn);
 
+
+	//Networking
+	void Serialise(PacketType packetTypeIn, char* dataIn,char* bufferOut);
+	PacketType DeSerialise(void*& dataOut, char* bufferIn);
+
+
 //VARIABLES
 public:
 
@@ -99,7 +107,7 @@ private:
 	Socket* mSocket;
 	char* mNetworkData;//Networking data in/out
 
-
+	int mCurrentPlayersAmount;
 	int mMaxPlayers;
 
 	sf::Clock* mPtrClock;

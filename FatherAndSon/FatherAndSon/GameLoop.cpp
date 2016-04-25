@@ -1,5 +1,41 @@
 #include "GameLoop.h"
 
+GameLoop::~GameLoop()
+{
+	if(mNetworkData)
+	{
+		delete mNetworkData;
+		mNetworkData = nullptr;
+	}
+
+	if(mSocket)
+	{
+	
+		delete mSocket;
+		mSocket = nullptr;
+	}
+
+	if(mBall)
+	{
+		delete mBall;
+		mBall = nullptr;
+	}
+
+	if(mPlayerController)
+	{
+		delete mPlayerController;
+		mPlayerController = nullptr;
+	}
+
+	if(mPlayer)
+	{
+		delete mPlayer;
+		mPlayer = nullptr;
+	}
+
+	mPlayers.clear();
+
+}
 void GameLoop::LoadTextures()
 {
 	//DEBUG TEXT///////////////////////////////
@@ -285,8 +321,6 @@ void GameLoop::MenuUpdate()
 			//SERVER SOCKET SETUP
 			mSocket->InitialiseServerSocket();
 			mSocket->ClearBuffers();
-
-			
 		}
 		
 		break;
@@ -301,8 +335,16 @@ void GameLoop::MenuUpdate()
 		{
 			//read message
 			//mNetworkData
-			
+			//MessageBox(NULL,L"Message received",L"YAY",MB_OK);
+
+			if(mNetworkData == "JOINREQUEST")
+			{
+				mCurrentPlayersAmount+=1;
+			}
+
 		}
+
+
 
 		if(mGameReady)
 		{
@@ -317,7 +359,33 @@ void GameLoop::MenuUpdate()
 			mSocket->SetTargetAddress((char*)mServerIP.c_str());
 			mSocket->ClearBuffers();
 
-			mSocket->SetBuffer("hello there");
+			//mNetworkData = (char*)PacketType::joinRequest;
+			//mNetworkData += new char("12345678901");
+
+			//mNetworkData = (char*)PacketType::joinRequest;
+
+			
+			JoinRequest* tempJoinRequest;
+			tempJoinRequest = new JoinRequest();
+			tempJoinRequest->partA[0] = 'h';
+			tempJoinRequest->partA[1] = 'e';
+			tempJoinRequest->partA[2] = 'l';
+			tempJoinRequest->partA[3] = 'l';
+			tempJoinRequest->partA[4] = 'o';
+			tempJoinRequest->partA[5] = '|';
+						   
+			tempJoinRequest->partB[0] = 'b';
+			tempJoinRequest->partB[1] = 'a';
+			tempJoinRequest->partB[2] = 'n';
+			tempJoinRequest->partB[3] = 't';
+			tempJoinRequest->partB[4] = 's';
+			tempJoinRequest->partB[5] = '|';
+
+			Serialise(PacketType::joinRequest,((char*)tempJoinRequest),mNetworkData);
+
+			mSocket->SetBuffer(mNetworkData);
+
+			//PacketType convertedPacket = (PacketType)*mNetworkData;
 			
 			
 			if(mSocket->Send()==-1)
@@ -325,8 +393,26 @@ void GameLoop::MenuUpdate()
 				MessageBox(NULL,L"Error Sending Message to Server",L"Error",MB_OK);
 			}
 			
+
 			
-			//Sleep(5000);
+
+			void* data = new char[MESSAGESIZE];
+
+			if(DeSerialise(data,mNetworkData)==PacketType::joinRequest)
+			{
+				JoinRequest* temppJoinRequest;
+				temppJoinRequest = new JoinRequest();
+
+				memcpy(temppJoinRequest,data,sizeof(JoinRequest));
+
+
+				
+			}
+
+			JoinRequest* poop = new JoinRequest;
+			poop = ((JoinRequest*)data);
+
+
 
 			/*
 			if(mSocket->Receive(mNetworkData)==-1)
@@ -334,7 +420,6 @@ void GameLoop::MenuUpdate()
 				MessageBox(NULL,L"Error Receiving Message from Server",L"Error",MB_OK);
 			}
 			*/
-
 
 			mMenuState = 3;
 		}
@@ -359,9 +444,91 @@ void GameLoop::MenuUpdate()
 	if(mInGame)
 	{
 		GameInitialise();
-		//mInGame = true;
 	}
 	
+}
+
+void GameLoop::Serialise(PacketType packetTypeIn, char* dataIn,char* bufferOut)
+{
+
+	size_t bufferSize;
+	
+	PacketType tempPacketType;
+	tempPacketType = packetTypeIn;
+
+
+	memcpy(bufferOut, &tempPacketType, sizeof(PacketType));
+
+
+	switch(packetTypeIn)
+	{
+	case PacketType::joinRequest:
+		//bufferSize = sizeof(PacketType) + sizeof(JoinRequest);
+		memcpy(bufferOut+sizeof(PacketType), &dataIn, sizeof(JoinRequest));
+		break;
+
+	case PacketType::ballData:
+		//bufferSize = sizeof(PacketType) + sizeof(LocomotionData);
+		memcpy(bufferOut+sizeof(PacketType), &dataIn, sizeof(LocomotionData));
+		break;
+
+	case PacketType::playerData:
+		//bufferSize = sizeof(PacketType) + sizeof(LocomotionData);
+		memcpy(bufferOut+sizeof(PacketType), &dataIn, sizeof(LocomotionData));
+		break;
+
+	case PacketType::playerInput:
+		//bufferSize = sizeof(PacketType) + sizeof(PlayerInput);
+		memcpy(bufferOut+sizeof(PacketType), &dataIn, sizeof(PlayerInput));
+		break;
+	}
+}
+
+PacketType GameLoop::DeSerialise(void*& dataOut, char* bufferIn)
+{
+	PacketType* tempPacketType = new PacketType();
+	*tempPacketType = PacketType::nullPacket;
+
+
+	char* tempBuffer = new char[16];
+	tempBuffer[0] = bufferIn[0];
+	tempBuffer[1] = bufferIn[1];
+	tempBuffer[2] = bufferIn[2];
+	tempBuffer[3] = bufferIn[3];
+	tempBuffer[4] = bufferIn[4];
+	tempBuffer[5] = bufferIn[5];
+	tempBuffer[6] = bufferIn[6];
+	tempBuffer[7] = bufferIn[7];
+	tempBuffer[8] = bufferIn[8];
+	tempBuffer[9] = bufferIn[9];
+	tempBuffer[10] = bufferIn[10];
+	tempBuffer[11] = bufferIn[11];
+	tempBuffer[12] = bufferIn[12];
+	tempBuffer[13] = bufferIn[13];
+	tempBuffer[14] = bufferIn[14];
+	tempBuffer[15] = bufferIn[15];
+
+
+	*tempPacketType = (PacketType)*tempBuffer;
+
+	switch(*tempPacketType)
+	{
+	case PacketType::joinRequest:
+		memcpy(dataOut,bufferIn+sizeof(PacketType),sizeof(JoinRequest));
+		break;
+	case PacketType::ballData:
+		memcpy(dataOut,bufferIn+sizeof(PacketType),sizeof(LocomotionData));
+		break;
+	case PacketType::playerData:
+		memcpy(dataOut,bufferIn+sizeof(PacketType),sizeof(LocomotionData));
+		break;
+	case PacketType::playerInput:
+		memcpy(dataOut,bufferIn+sizeof(PacketType),sizeof(PlayerInput));
+		break;
+	}
+
+
+	return *tempPacketType;
 }
 
 void GameLoop::Collision()

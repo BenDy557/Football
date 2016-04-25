@@ -96,7 +96,7 @@ const sf::Color playerOOS(0.0f,164.0f,164.0f);
 const sf::Color floorColor(100.0f,100.0f,100.0f);
 const sf::Color wallColor(36.0f,82.0f,36.0f);
 
-enum PacketType{playerInput,playerData,ballData};
+enum PacketType{nullPacket,playerInput,playerData,ballData,joinRequest};
 
 struct LocomotionData
 {
@@ -104,6 +104,12 @@ struct LocomotionData
 	float mPositionZ;
 	Vector2 mVelocity;
 	float mVelocityZ;
+};
+
+struct JoinRequest
+{
+	char partA[6];
+	char partB[6];
 };
 
 #endif

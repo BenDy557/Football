@@ -58,7 +58,7 @@ private:
 	WSADATA w;
 
 	SOCKET m_Socket;
-	int *m_AddressFamilySpecification, *m_Type, *m_Protocol;
+	int m_AddressFamilySpecification, m_Type, m_Protocol;
 
 	sockaddr_in *m_SendToAddress;
 	sockaddr_in *m_SentFromAddress;
