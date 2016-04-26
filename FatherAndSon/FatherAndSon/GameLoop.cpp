@@ -120,7 +120,10 @@ void GameLoop::GameInitialise()
 	//PLAYER///////////////////////////////////
 	mPlayerController = new PlayerController();
 
-	mPlayer = new Player(true);
+	if(!mPlayer)
+	{
+		mPlayer = new Player(true);
+	}
 	mPlayer->Initialise(sf::Vector2f(100.0f,100.0f),sf::Color::Color(255.0f,0.0f,255.0f,255.0f));//TODO//21-10-15//MagicNumbers
 	mPlayer->setTexture(mPlayertexture,false);
 	mPlayer->setOrigin((TILE_SCALE/2),(TILE_SCALE*3/4));//TODO//21-10-15//MagicNumbers
@@ -130,10 +133,8 @@ void GameLoop::GameInitialise()
 	mPlayer->SetBall(mBall);
 	//player.setCameraPos(mainCamera.position);
 	
-	if(mServer)
-	{
-		mPlayers.push_back(mPlayer);
-	}
+	mPlayers.push_back(mPlayer);
+	
 	
 	//mControllers.push_back(mPlayerController);
 
@@ -307,145 +308,179 @@ void GameLoop::MenuUpdate()
 
 	switch(mMenuState)
 	{
-	case 0://Client or server
+	case 0://///////////CLIENT/SERVER//
 		if(mClient)
 		{
 			mMenuState = 2;
-
-			
 		}
 		else if(mServer)
 		{
 			mMenuState = 1;
-
 			//SERVER SOCKET SETUP
 			mSocket->InitialiseServerSocket();
 			mSocket->ClearBuffers();
 		}
-		
 		break;
 
-	case 1://Server
-		
+	case 1:///////////////////SERVER//
 		if(mSocket->Receive(mNetworkData)==-1)
 		{
-			//Would block
+			//wouldblock
 		}
 		else
 		{
-			//read message
-			//mNetworkData
-			//MessageBox(NULL,L"Message received",L"YAY",MB_OK);
-
-			if(mNetworkData == "JOINREQUEST")
+			//Deserialise
+			
+			void* data = new char[MESSAGESIZE];
+			switch(DeSerialise(data,mNetworkData))
 			{
-				mCurrentPlayersAmount+=1;
+			case PacketType::joinRequest:
+				
+				//Create socket for each client
+				Socket* tempClientSocket = new Socket();
+				tempClientSocket->Initialise();
+				*(tempClientSocket->m_SendToAddress) = *(mSocket->m_SentFromAddress);
+				tempClientSocket->ClearBuffers();
+				mClients.push_back(tempClientSocket);
+
+
+				
+				JoinRequest* usefulData = new JoinRequest;
+
+				memcpy(usefulData,data,sizeof(JoinRequest));
+
+				mCurrentPlayersAmount++;
+
+				//Send client acceptance message
+				JoinGranted* tempJoinGranted = new JoinGranted();
+				tempJoinGranted->playerNumber = mCurrentPlayersAmount;
+
+				if(mCurrentPlayersAmount%2 == 0)
+				{
+					tempJoinGranted->playerTeam = 2;
+				}
+				else
+				{
+					tempJoinGranted->playerTeam = 1;
+				}
+
+				Serialise(PacketType::joinGranted,(char*)tempJoinGranted,mNetworkData);
+				tempClientSocket->SetBuffer(mNetworkData);
+				tempClientSocket->Send();
+
+				break;
 			}
-
 		}
-
 
 
 		if(mGameReady)
 		{
+			GameStart tempGameStart;
+			tempGameStart.numberOfPlayers = mCurrentPlayersAmount;
+
+			Serialise(PacketType::gameStart,(char*)&tempGameStart,mNetworkData);
+
+			for (std::list<Socket*>::iterator it = mClients.begin(); it != mClients.end(); it++)
+			{
+				(*it)->ClearBuffers();
+				(*it)->SetBuffer(mNetworkData);
+				(*it)->Send();
+			}
+
 			mInGame = true;
 		}
 		break;
-	case 2://Client enter serverIP
+
+	case 2:///////////////////CLIENT//enter serverIP
 		if(mIPReady)
 		{
 			//CLIENT SOCKET SETUP
 			mSocket->Initialise();
 			mSocket->SetTargetAddress((char*)mServerIP.c_str());
 			mSocket->ClearBuffers();
-
-			//mNetworkData = (char*)PacketType::joinRequest;
-			//mNetworkData += new char("12345678901");
-
-			//mNetworkData = (char*)PacketType::joinRequest;
-
 			
-			JoinRequest* tempJoinRequest;
-			tempJoinRequest = new JoinRequest();
+			JoinRequest* tempJoinRequest = new JoinRequest();
 			tempJoinRequest->partA[0] = 'h';
 			tempJoinRequest->partA[1] = 'e';
 			tempJoinRequest->partA[2] = 'l';
 			tempJoinRequest->partA[3] = 'l';
 			tempJoinRequest->partA[4] = 'o';
-			tempJoinRequest->partA[5] = '|';
+			tempJoinRequest->partA[5] = '\0';
 						   
 			tempJoinRequest->partB[0] = 'b';
 			tempJoinRequest->partB[1] = 'a';
 			tempJoinRequest->partB[2] = 'n';
 			tempJoinRequest->partB[3] = 't';
 			tempJoinRequest->partB[4] = 's';
-			tempJoinRequest->partB[5] = '|';
+			tempJoinRequest->partB[5] = '\0';
 
-			Serialise(PacketType::joinRequest,((char*)tempJoinRequest),mNetworkData);
+			
+			//Serialise
+			Serialise(PacketType::joinRequest,(char*)tempJoinRequest,mNetworkData);
 
+			//SEND
 			mSocket->SetBuffer(mNetworkData);
-
-			//PacketType convertedPacket = (PacketType)*mNetworkData;
-			
-			
 			if(mSocket->Send()==-1)
 			{
 				MessageBox(NULL,L"Error Sending Message to Server",L"Error",MB_OK);
 			}
-			
-
-			
-
-			void* data = new char[MESSAGESIZE];
-
-			if(DeSerialise(data,mNetworkData)==PacketType::joinRequest)
-			{
-				JoinRequest* temppJoinRequest;
-				temppJoinRequest = new JoinRequest();
-
-				memcpy(temppJoinRequest,data,sizeof(JoinRequest));
-
-
-				
-			}
-
-			JoinRequest* poop = new JoinRequest;
-			poop = ((JoinRequest*)data);
-
-
-
-			/*
-			if(mSocket->Receive(mNetworkData)==-1)
-			{
-				MessageBox(NULL,L"Error Receiving Message from Server",L"Error",MB_OK);
-			}
-			*/
 
 			mMenuState = 3;
 		}
 		break;
-	case 3://Client
+	case 3:///////////////////CLIENT//waiting for game start
 
-		//Connect to server
-
-		if(mGameReady)
+		if(mSocket->Receive(mNetworkData)==-1)
 		{
-			mInGame = true;
+			//wouldblock
+		}
+		else
+		{
+			void* data = new char[MESSAGESIZE];
+			
+
+			switch(DeSerialise(data,mNetworkData))
+			{
+			case PacketType::joinGranted:
+				{
+					JoinGranted* usefulData = new JoinGranted();
+					memcpy(usefulData,data,sizeof(JoinGranted));
+
+					mPlayer = new Player(true);
+					mPlayer->mPlayerNumber = usefulData->playerNumber;
+					mPlayer->mTeam = usefulData->playerTeam;
+
+					break;
+				}
+
+			case PacketType::gameStart:
+				{
+					GameStart* usefulData = new GameStart;
+					memcpy(usefulData,data,sizeof(GameStart));
+
+					for(int i = 0; i < usefulData->numberOfPlayers; i++)
+					{
+						PlayerController* tempPlayerController = new PlayerController();
+					
+						SpawnPlayer(tempPlayerController);
+
+						mControllers.push_back(tempPlayerController);
+					}
+
+					mInGame=true;
+					break;
+				}
+			}
 		}
 		break;
 	}
 
-
 	MenuDraw();
 
-	//DisplayText(Vector2(0.0f,0.0f),"Hello");
-	//transition
-	
 	if(mInGame)
 	{
 		GameInitialise();
 	}
-	
 }
 
 void GameLoop::Serialise(PacketType packetTypeIn, char* dataIn,char* bufferOut)
@@ -455,33 +490,37 @@ void GameLoop::Serialise(PacketType packetTypeIn, char* dataIn,char* bufferOut)
 	
 	PacketType tempPacketType;
 	tempPacketType = packetTypeIn;
-
-
+	
 	memcpy(bufferOut, &tempPacketType, sizeof(PacketType));
-
-
+	
 	switch(packetTypeIn)
 	{
 	case PacketType::joinRequest:
-		//bufferSize = sizeof(PacketType) + sizeof(JoinRequest);
-		memcpy(bufferOut+sizeof(PacketType), &dataIn, sizeof(JoinRequest));
+		memcpy(&bufferOut[sizeof(PacketType)], dataIn, sizeof(JoinRequest));
 		break;
 
 	case PacketType::ballData:
-		//bufferSize = sizeof(PacketType) + sizeof(LocomotionData);
-		memcpy(bufferOut+sizeof(PacketType), &dataIn, sizeof(LocomotionData));
+		memcpy(&bufferOut[sizeof(PacketType)], dataIn, sizeof(LocomotionData));
 		break;
 
 	case PacketType::playerData:
-		//bufferSize = sizeof(PacketType) + sizeof(LocomotionData);
-		memcpy(bufferOut+sizeof(PacketType), &dataIn, sizeof(LocomotionData));
+		memcpy(&bufferOut[sizeof(PacketType)], dataIn, sizeof(LocomotionData));
 		break;
 
-	case PacketType::playerInput:
-		//bufferSize = sizeof(PacketType) + sizeof(PlayerInput);
-		memcpy(bufferOut+sizeof(PacketType), &dataIn, sizeof(PlayerInput));
+	case PacketType::playerInputData:
+		memcpy(&bufferOut[sizeof(PacketType)], dataIn, sizeof(PlayerInput));
+		break;
+
+	case PacketType::joinGranted:
+		memcpy(&bufferOut[sizeof(PacketType)], dataIn, sizeof(JoinGranted));
+		break;
+
+	case PacketType::gameStart:
+		memcpy(&bufferOut[sizeof(PacketType)], dataIn, sizeof(GameStart));
 		break;
 	}
+
+	
 }
 
 PacketType GameLoop::DeSerialise(void*& dataOut, char* bufferIn)
@@ -514,16 +553,16 @@ PacketType GameLoop::DeSerialise(void*& dataOut, char* bufferIn)
 	switch(*tempPacketType)
 	{
 	case PacketType::joinRequest:
-		memcpy(dataOut,bufferIn+sizeof(PacketType),sizeof(JoinRequest));
+		memcpy(dataOut,&bufferIn[sizeof(PacketType)],sizeof(JoinRequest));
 		break;
 	case PacketType::ballData:
-		memcpy(dataOut,bufferIn+sizeof(PacketType),sizeof(LocomotionData));
+		memcpy(dataOut,&bufferIn[sizeof(PacketType)],sizeof(LocomotionData));
 		break;
 	case PacketType::playerData:
-		memcpy(dataOut,bufferIn+sizeof(PacketType),sizeof(LocomotionData));
+		memcpy(dataOut,&bufferIn[sizeof(PacketType)],sizeof(LocomotionData));
 		break;
-	case PacketType::playerInput:
-		memcpy(dataOut,bufferIn+sizeof(PacketType),sizeof(PlayerInput));
+	case PacketType::playerInputData:
+		memcpy(dataOut,&bufferIn[sizeof(PacketType)],sizeof(PlayerInput));
 		break;
 	}
 
@@ -550,7 +589,8 @@ void GameLoop::MenuDraw()
 
 	case 1://Server
 		mPtrWindow->draw(DisplayText(Vector2(80.0f,100.0f),"You are the Server"));
-		mPtrWindow->draw(DisplayText(Vector2(80.0f,128.0f),"Press ENTER to begin the game"));
+		mPtrWindow->draw(DisplayText(Vector2(80.0f,156.0f),"Press ENTER to begin the game"));
+		mPtrWindow->draw(DisplayText(Vector2(80.0f,128.0f),"Current Players: ",mCurrentPlayersAmount));
 		break;
 
 	case 2://Client IP Enter
@@ -771,6 +811,7 @@ void GameLoop::MenuEventLoop()
 			}
 			if(event.key.code == sf::Keyboard::Return)
 			{
+				
 				if(!mIPReady)
 				{
 					mIPReady = true;
@@ -779,6 +820,7 @@ void GameLoop::MenuEventLoop()
 				{
 					mGameReady = true;
 				}
+
 			}
 			if(event.key.code == sf::Keyboard::C)
 			{

@@ -112,6 +112,7 @@ private:
 	
 public:
 	int mPlayerNumber;
+	int mTeam;
 
 	sf::Vector2f prevPosition;
 	sf::RectangleShape lastCollisionMarker;//TODO//OLD

@@ -1,68 +1,9 @@
-﻿Build started 25/04/2016 19:20:41.
+﻿Build started 26/04/2016 20:51:15.
      1>Project "M:\Masters\NetworkGameDevelopment\Coursework\Football\FatherAndSon\FatherAndSon\FatherAndSon.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
-         Creating "Debug\FatherAndSon.unsuccessfulbuild" because "AlwaysCreate" was specified.
+         Touching "Debug\FatherAndSon.unsuccessfulbuild".
        ClCompile:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"M:\Masters\Libraries\SFML-2.2\include" /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_STATIC /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt GameLoop.cpp
-         GameLoop.cpp
-     1>c:\program files (x86)\microsoft sdks\windows\v7.0a\include\winerror.h(19881): warning C4005: 'WSAEWOULDBLOCK' : macro redefinition
-                 m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\socket.h(19) : see previous definition of 'WSAEWOULDBLOCK'
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(82): warning C4244: 'initializing' : conversion from 'float' to 'const int', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.h(31): warning C4355: 'this' : used in base member initializer list
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(98): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(98): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(124): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(124): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(124): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(124): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(156): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(156): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(270): warning C4018: '<' : signed/unsigned mismatch
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(384): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(401): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(454): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(470): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(473): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(476): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(481): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(486): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(458): warning C4101: 'bufferSize' : unreferenced local variable
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(496): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(522): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(525): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(528): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(531): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(582): warning C4018: '<' : signed/unsigned mismatch
-     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\gameloop.cpp(887): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         All outputs are up-to-date.
        ManifestResourceCompile:
          C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\FatherAndSon.exe.embed.manifest.res" Debug\FatherAndSon_manifest.rc 
        Link:
@@ -104,4 +45,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.02
+Time Elapsed 00:00:01.27

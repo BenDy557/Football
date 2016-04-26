@@ -51,7 +51,9 @@ public:
 		memset(mNetworkData,'p',MESSAGESIZE);
 		mNetworkData[MESSAGESIZE-1] = '\0';
 		
-		mCurrentPlayersAmount = 0;
+
+		mPlayer = nullptr;
+		mCurrentPlayersAmount = 1;
 
 		mSocket = new Socket();
 		
@@ -170,6 +172,8 @@ private:
 	std::list<Player*> mPlayers;
 	std::list<PlayerController*> mControllers;
 
+
+	std::list<Socket*> mClients;
 	/*
 	Player* mPlayerRed;
 	PlayerController mPlayerControllerRed;

@@ -156,7 +156,7 @@ int Socket::Receive(char*& dataOut)
 		if (errorCode == WSAEWOULDBLOCK)
 		{    
 			// recv would have blocked,    
-			memset(m_BufferReceived,'-',m_MessageSize);
+			memset(m_BufferReceived,'E',m_MessageSize);
 		} 
 		else 
 		{  
@@ -199,10 +199,10 @@ int Socket::SendEcho()
 void Socket::SetBuffer(char* bufferIn)
 {
 	//m_Buffer = bufferIn;
-	memset(m_BufferToSend, '-', MESSAGESIZE);
+	memset(m_BufferToSend, 'A', MESSAGESIZE);
 	m_BufferToSend[MESSAGESIZE-1] = '\0';
 	
-	for(int i = 0; bufferIn[i] != '\0';i++)
+	for(int i = 0; i < MESSAGESIZE ;i++)
 	{
 		m_BufferToSend[i] = bufferIn[i];
 	}
@@ -211,10 +211,10 @@ void Socket::SetBuffer(char* bufferIn)
 
 void Socket::ClearBuffers()
 {
-	memset(m_BufferReceived,'-',MESSAGESIZE);
+	memset(m_BufferReceived,'I',MESSAGESIZE);
 	m_BufferReceived[MESSAGESIZE-1] = '\0';
 
-	memset(m_BufferToSend,'-',MESSAGESIZE);
+	memset(m_BufferToSend,'O',MESSAGESIZE);
 	m_BufferToSend[MESSAGESIZE-1] = '\0';
 		
 }

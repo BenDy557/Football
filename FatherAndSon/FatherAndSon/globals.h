@@ -96,7 +96,9 @@ const sf::Color playerOOS(0.0f,164.0f,164.0f);
 const sf::Color floorColor(100.0f,100.0f,100.0f);
 const sf::Color wallColor(36.0f,82.0f,36.0f);
 
-enum PacketType{nullPacket,playerInput,playerData,ballData,joinRequest};
+
+//NETWORKING STRUCTS
+enum PacketType{nullPacket,playerInputData,playerData,ballData,joinRequest,joinGranted,gameStart};
 
 struct LocomotionData
 {
@@ -111,5 +113,18 @@ struct JoinRequest
 	char partA[6];
 	char partB[6];
 };
+
+struct JoinGranted
+{
+	short playerNumber;
+	short playerTeam;
+};
+
+struct GameStart
+{
+	short numberOfPlayers;
+};
+
+
 
 #endif

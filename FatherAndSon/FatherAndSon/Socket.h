@@ -7,13 +7,13 @@
 
 
 // The UDP port number for the server
-#define SERVERPORT 5555
-#define PORTNUMBERMIN 5556
+#define SERVERPORT 5600
+#define PORTNUMBERMIN 5601
 #define PORTNUMBERMAX 6000
 
 // The (fixed) size of message that we send between the two programs
 #define MESSAGESIZE_MAX 65507//MAX message size
-#define MESSAGESIZE 16
+#define MESSAGESIZE 32
 
 //ERROR CODES
 #define WSAEWOULDBLOCK 10035
@@ -53,6 +53,8 @@ private:
 	
 	//Variables
 public:
+	sockaddr_in *m_SendToAddress;
+	sockaddr_in *m_SentFromAddress;
 
 private:
 	WSADATA w;
@@ -60,8 +62,7 @@ private:
 	SOCKET m_Socket;
 	int m_AddressFamilySpecification, m_Type, m_Protocol;
 
-	sockaddr_in *m_SendToAddress;
-	sockaddr_in *m_SentFromAddress;
+	
 
 	char* m_BufferReceived;
 	char* m_BufferToSend;
