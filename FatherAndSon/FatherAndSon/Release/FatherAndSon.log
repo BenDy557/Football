@@ -1,35 +1,67 @@
-﻿Build started 23/10/2015 14:12:22.
-     1>Project "M:\Masters\ComputerGameDevelopmentProject\FatherAndSon\FatherAndSon\FatherAndSon.vcxproj" on node 2 (build target(s)).
+﻿Build started 27/04/2016 11:52:41.
+     1>Project "M:\Masters\NetworkGameDevelopment\Coursework\Football\FatherAndSon\FatherAndSon\FatherAndSon.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
-         Touching "Release\FatherAndSon.unsuccessfulbuild".
+         Creating "Release\FatherAndSon.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"M:\Masters\Libraries\SFML-2.2\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Camera.cpp GameLoop.cpp GameObjectIso.cpp main.cpp MapGrid.cpp ParticleEmitter.cpp Player.cpp PlayerController.cpp Ray.cpp Vector2.cpp
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"M:\Masters\Libraries\SFML-2.2\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Ball.cpp Camera.cpp GameLoop.cpp GameObjectIso.cpp main.cpp MapGrid.cpp ParticleEmitter.cpp Player.cpp PlayerController.cpp Ray.cpp Socket.cpp Vector2.cpp
+         Ball.cpp
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(82): warning C4244: 'initializing' : conversion from 'float' to 'const int', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
          Camera.cpp
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(82): warning C4244: 'initializing' : conversion from 'float' to 'const int', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(92): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(92): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(92): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(95): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(95): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(95): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(82): warning C4244: 'initializing' : conversion from 'float' to 'const int', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
      1>Camera.cpp(14): warning C4482: nonstandard extension used: enum 'CameraMode' used in qualified name
      1>Camera.cpp(40): warning C4482: nonstandard extension used: enum 'CameraMode' used in qualified name
      1>Camera.cpp(40): warning C4482: nonstandard extension used: enum 'CameraMode' used in qualified name
@@ -37,193 +69,248 @@
      1>Camera.cpp(47): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
      1>Camera.cpp(88): warning C4305: 'argument' : truncation from 'double' to 'float'
          GameLoop.cpp
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(82): warning C4244: 'initializing' : conversion from 'float' to 'const int', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(92): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(92): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(92): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(95): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(95): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(95): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\GameLoop.h(39): warning C4355: 'this' : used in base member initializer list
-     1>GameLoop.cpp(44): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>GameLoop.cpp(44): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>GameLoop.cpp(126): warning C4018: '<' : signed/unsigned mismatch
-     1>GameLoop.cpp(161): warning C4018: '<' : signed/unsigned mismatch
-     1>GameLoop.cpp(346): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\include\winerror.h(19881): warning C4005: 'WSAEWOULDBLOCK' : macro redefinition
+                 m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\Socket.h(19) : see previous definition of 'WSAEWOULDBLOCK'
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(82): warning C4244: 'initializing' : conversion from 'float' to 'const int', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\GameLoop.h(31): warning C4355: 'this' : used in base member initializer list
+     1>GameLoop.cpp(98): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>GameLoop.cpp(98): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>GameLoop.cpp(127): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>GameLoop.cpp(127): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>GameLoop.cpp(127): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>GameLoop.cpp(127): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>GameLoop.cpp(157): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+     1>GameLoop.cpp(157): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+     1>GameLoop.cpp(271): warning C4018: '<' : signed/unsigned mismatch
+     1>GameLoop.cpp(337): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
+     1>GameLoop.cpp(364): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
+     1>GameLoop.cpp(381): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
+     1>GameLoop.cpp(423): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
+     1>GameLoop.cpp(446): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
+     1>GameLoop.cpp(458): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
+     1>GameLoop.cpp(500): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
+     1>GameLoop.cpp(504): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
+     1>GameLoop.cpp(508): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
+     1>GameLoop.cpp(512): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
+     1>GameLoop.cpp(516): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
+     1>GameLoop.cpp(520): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
+     1>GameLoop.cpp(491): warning C4101: 'bufferSize' : unreferenced local variable
+     1>GameLoop.cpp(531): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
+     1>GameLoop.cpp(557): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
+     1>GameLoop.cpp(560): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
+     1>GameLoop.cpp(563): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
+     1>GameLoop.cpp(566): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
+     1>GameLoop.cpp(569): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
+     1>GameLoop.cpp(572): warning C4482: nonstandard extension used: enum 'PacketType' used in qualified name
+     1>GameLoop.cpp(601): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>GameLoop.cpp(624): warning C4018: '<' : signed/unsigned mismatch
+     1>GameLoop.cpp(931): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
          GameObjectIso.cpp
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(82): warning C4244: 'initializing' : conversion from 'float' to 'const int', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(92): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(92): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(92): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(95): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(95): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(95): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>GameObjectIso.cpp(5): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
-     1>GameObjectIso.cpp(5): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(82): warning C4244: 'initializing' : conversion from 'float' to 'const int', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
          main.cpp
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(82): warning C4244: 'initializing' : conversion from 'float' to 'const int', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(92): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(92): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(92): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(95): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(95): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(95): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\GameLoop.h(39): warning C4355: 'this' : used in base member initializer list
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\Socket.h(19): warning C4005: 'WSAEWOULDBLOCK' : macro redefinition
+                 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\include\winerror.h(19881) : see previous definition of 'WSAEWOULDBLOCK'
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(82): warning C4244: 'initializing' : conversion from 'float' to 'const int', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\GameLoop.h(31): warning C4355: 'this' : used in base member initializer list
          MapGrid.cpp
          ParticleEmitter.cpp
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(82): warning C4244: 'initializing' : conversion from 'float' to 'const int', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(92): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(92): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(92): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(95): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(95): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(95): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(82): warning C4244: 'initializing' : conversion from 'float' to 'const int', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
      1>ParticleEmitter.cpp(16): warning C4244: '=' : conversion from 'float' to 'sf::Uint8', possible loss of data
      1>ParticleEmitter.cpp(17): warning C4244: '=' : conversion from 'float' to 'sf::Uint8', possible loss of data
      1>ParticleEmitter.cpp(18): warning C4244: '=' : conversion from 'float' to 'sf::Uint8', possible loss of data
      1>ParticleEmitter.cpp(37): warning C4244: '*=' : conversion from 'float' to 'sf::Uint8', possible loss of data
          Player.cpp
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(82): warning C4244: 'initializing' : conversion from 'float' to 'const int', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(92): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(92): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(92): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(95): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(95): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(95): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>Player.cpp(78): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Player.cpp(79): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(82): warning C4244: 'initializing' : conversion from 'float' to 'const int', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>Player.cpp(102): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Player.cpp(103): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Player.cpp(334): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>Player.cpp(335): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>Player.cpp(337): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>Player.cpp(337): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
          PlayerController.cpp
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(82): warning C4244: 'initializing' : conversion from 'float' to 'const int', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(92): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(92): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(92): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(95): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(95): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(95): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>m:\masters\computergamedevelopmentproject\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>PlayerController.cpp(80): warning C4553: '==' : operator has no effect; did you intend '='?
-     1>PlayerController.cpp(84): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>PlayerController.cpp(88): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>PlayerController.cpp(95): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>PlayerController.cpp(99): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>PlayerController.cpp(108): warning C4553: '==' : operator has no effect; did you intend '='?
-     1>PlayerController.cpp(112): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>PlayerController.cpp(116): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>PlayerController.cpp(123): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>PlayerController.cpp(127): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(82): warning C4244: 'initializing' : conversion from 'float' to 'const int', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(87): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(88): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(89): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(90): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(91): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(93): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(94): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(96): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\globals.h(97): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>PlayerController.cpp(86): warning C4553: '==' : operator has no effect; did you intend '='?
+     1>PlayerController.cpp(90): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>PlayerController.cpp(94): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>PlayerController.cpp(101): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>PlayerController.cpp(105): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>PlayerController.cpp(114): warning C4553: '==' : operator has no effect; did you intend '='?
+     1>PlayerController.cpp(118): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>PlayerController.cpp(122): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>PlayerController.cpp(129): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>PlayerController.cpp(133): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
          Ray.cpp
      1>Ray.cpp(31): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
      1>Ray.cpp(86): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         Socket.cpp
+     1>C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\include\winerror.h(19881): warning C4005: 'WSAEWOULDBLOCK' : macro redefinition
+                 m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\Socket.h(19) : see previous definition of 'WSAEWOULDBLOCK'
          Vector2.cpp
        Link:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"M:\Masters\ComputerGameDevelopmentProject\FatherAndSon\Release\FatherAndSon.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"M:\Masters\Libraries\SFML-2.2\lib" "sfml-graphics-s.lib" "sfml-window-s.lib" "sfml-system-s.lib" glew.lib freetype.lib jpeg.lib opengl32.lib "sfml-audio-s.lib" sndfile.lib openal32.lib "sfml-main.lib" kernel32.lib user32.lib gdi32.lib winspool.lib winmm.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\FatherAndSon.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"M:\Masters\ComputerGameDevelopmentProject\FatherAndSon\Release\FatherAndSon.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"M:\Masters\ComputerGameDevelopmentProject\FatherAndSon\Release\FatherAndSon.lib" /MACHINE:X86 Release\Camera.obj
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"M:\Masters\NetworkGameDevelopment\Coursework\Football\FatherAndSon\Release\FatherAndSon.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"M:\Masters\Libraries\SFML-2.2\lib" "sfml-graphics-s.lib" "sfml-window-s.lib" "sfml-system-s.lib" glew.lib freetype.lib jpeg.lib opengl32.lib "sfml-audio-s.lib" sndfile.lib openal32.lib "sfml-main.lib" kernel32.lib user32.lib gdi32.lib winspool.lib winmm.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\FatherAndSon.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"M:\Masters\NetworkGameDevelopment\Coursework\Football\FatherAndSon\Release\FatherAndSon.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"M:\Masters\NetworkGameDevelopment\Coursework\Football\FatherAndSon\Release\FatherAndSon.lib" /MACHINE:X86 Release\Ball.obj
+         Release\Camera.obj
          Release\GameLoop.obj
          Release\GameObjectIso.obj
          Release\main.obj
@@ -232,17 +319,19 @@
          Release\Player.obj
          Release\PlayerController.obj
          Release\Ray.obj
+         Release\Socket.obj
          Release\Vector2.obj
          Generating code
+     1>m:\masters\networkgamedevelopment\coursework\football\fatherandson\fatherandson\socket.cpp(132): warning C4715: 'Socket::SocketSetUp' : not all control paths return a value
          Finished generating code
-         FatherAndSon.vcxproj -> M:\Masters\ComputerGameDevelopmentProject\FatherAndSon\Release\FatherAndSon.exe
+         FatherAndSon.vcxproj -> M:\Masters\NetworkGameDevelopment\Coursework\Football\FatherAndSon\Release\FatherAndSon.exe
        Manifest:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"M:\Masters\ComputerGameDevelopmentProject\FatherAndSon\Release\FatherAndSon.exe;#1" /manifest Release\FatherAndSon.exe.intermediate.manifest
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"M:\Masters\NetworkGameDevelopment\Coursework\Football\FatherAndSon\Release\FatherAndSon.exe;#1" /manifest Release\FatherAndSon.exe.intermediate.manifest
        FinalizeBuildStatus:
          Deleting file "Release\FatherAndSon.unsuccessfulbuild".
          Touching "Release\FatherAndSon.lastbuildstate".
-     1>Done Building Project "M:\Masters\ComputerGameDevelopmentProject\FatherAndSon\FatherAndSon\FatherAndSon.vcxproj" (build target(s)).
+     1>Done Building Project "M:\Masters\NetworkGameDevelopment\Coursework\Football\FatherAndSon\FatherAndSon\FatherAndSon.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:09.83
+Time Elapsed 00:00:10.22

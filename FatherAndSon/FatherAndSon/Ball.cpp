@@ -48,7 +48,7 @@ void Ball::Movement()
 
 	//COLLISION
 	mPrevGrounded = mGrounded;
-	if(getWorldPositionZ() < 0.0f)
+	if(getWorldPositionZ() <= 0.0f)
 	{
 		setWorldPositionZ(0.0f);
 		mGrounded = true;	

@@ -39,6 +39,7 @@ public:
 	void Initialise(sf::Vector2f positionIn,sf::Color colorIn);//TODO//OLD
 	void Update();//TODO//OLD
 	void SetInput(PlayerInput* playerInputIn);
+	PlayerInput GetPlayerInput();
 	bool CheckBoxCollide(sf::RectangleShape boundingBoxIn);//TODO//OLD
 
 	float getMovementBearing();
@@ -54,6 +55,8 @@ public:
 	void setAimingIntensity(float intensityScaleIn);
 
 	Vector2 getVelocity();
+	float GetVelocityZ();
+	void SetVelocity(float xVelIn, float yVelIn, float zVelIn);
 	float getVelocityMagnitude();
 
 	void setDeltaTime(float *deltaTimeIn);
@@ -113,6 +116,7 @@ private:
 public:
 	int mPlayerNumber;
 	int mTeam;
+	bool mBallKicked;
 
 	sf::Vector2f prevPosition;
 	sf::RectangleShape lastCollisionMarker;//TODO//OLD

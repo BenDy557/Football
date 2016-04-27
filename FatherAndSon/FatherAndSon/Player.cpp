@@ -52,7 +52,7 @@ Player::Player(bool hasShadowIn):
 	setWorldPosition(5.0f,10.0f);
 
 	
-
+	mBallKicked = false;
 	mGrounded = true;
 	mZVelocity = 0.0f;
 	mGravity = 9.8f;
@@ -86,6 +86,8 @@ void Player::Update()//TODO//14-09-15//Overwrites GameObjectIso update
 	Actions();
 	Movement();
 	
+	Collision();
+
 	GameObjectIso::Update();
 
 	Collision();
@@ -172,7 +174,7 @@ void Player::Actions()
 
 void Player::Collision()
 {
-	if(getWorldPositionZ() < 0.0f)
+	if(getWorldPositionZ() <= 0.0f)
 	{
 		setWorldPositionZ(0.0f);
 		mGrounded = true;
@@ -212,6 +214,7 @@ void Player::Kick()
 		{	
 			//mPtrBall->IncrementVelocity((acceleration*0.3f)+(velocity*0.25f),mPtrBall->GetVelocityZ()/2.0f);
 			mPtrBall->SetVelocity((acceleration*0.6f)+(velocity*0.25f),mPtrBall->GetVelocityZ()/2.0f);
+			mBallKicked = true;
 			//mPtrBall->IncrementVelocity((acceleration*0.3f)+(velocity*0.25f),0.0f);
 		}
 
@@ -238,6 +241,7 @@ void Player::Chip()
 		{
 			//mPtrBall->IncrementVelocity((acceleration*0.1f),2.0f);
 			mPtrBall->SetVelocity(mPtrBall->GetVelocity()*0.5f,4.0f);
+			mBallKicked = true;
 			
 		}
 
@@ -482,6 +486,20 @@ Vector2 Player::getVelocity()
 	return velocity;
 }
 
+float Player::GetVelocityZ()
+{
+	return mZVelocity;
+}
+
+void Player::SetVelocity(float xVelIn, float yVelIn, float zVelIn)
+{
+	velocity.x = xVelIn;
+	velocity.y = yVelIn;
+
+	mZVelocity = zVelIn;
+
+}
+
 float Player::getVelocityMagnitude()
 {
 	return velocity.Get_magnitude();
@@ -501,6 +519,11 @@ void Player::setDeltaTime(float *deltaTimeIn)
 void Player::SetInput(PlayerInput* playerInputIn)
 {
 	ptrInputState = playerInputIn;
+}
+
+PlayerInput Player::GetPlayerInput()
+{
+	return *ptrInputState;
 }
 
 void Player::SetBall(Ball *ballIn)

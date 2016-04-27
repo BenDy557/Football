@@ -11,7 +11,7 @@ Camera::Camera()
 	velocity = 0.0f;
 	zoom = 1.0f;//TODO//11-09-15//Give a use
 
-	cameraMode = CameraMode::camModeControlLoose;
+	cameraMode = CameraMode::camModeFollowLoose;
 	cameraLean = 0.0f;
 	cameraLeanDistance = 2.0f;
 

@@ -10,7 +10,6 @@ GameLoop::~GameLoop()
 
 	if(mSocket)
 	{
-	
 		delete mSocket;
 		mSocket = nullptr;
 	}
@@ -112,7 +111,7 @@ void GameLoop::GameInitialise()
 	//mBall->setScale(sf::Vector2f(TILE_SCALE,TILE_SCALE));
 	mBall->setTexture(mBallTexture,true);
 	mBall->setOrigin(TILE_SCALE/2,(TILE_SCALE*3/4));
-	mBall->setWorldPosition(5.0f,5.0f);
+	mBall->setWorldPosition(12.0f,9.0f);
 	mBall->mShadow->setTexture(mShadowTexture,true);
 	mBall->setDeltaTime(&deltaTime);
 	
@@ -124,7 +123,25 @@ void GameLoop::GameInitialise()
 	{
 		mPlayer = new Player(true);
 	}
-	mPlayer->Initialise(sf::Vector2f(100.0f,100.0f),sf::Color::Color(255.0f,0.0f,255.0f,255.0f));//TODO//21-10-15//MagicNumbers
+
+	for (std::list<Player*>::iterator it = mPlayers.begin(); it != mPlayers.end(); it++)
+	{
+
+		if((*it)->mTeam == 1)
+		{
+			(*it)->setColor(sf::Color::Blue);
+		}
+		else if((*it)->mTeam == 2)
+		{
+			(*it)->setColor(sf::Color::Red);
+		}
+		else
+		{
+			(*it)->setColor(sf::Color::Magenta);
+		}
+
+	}
+
 	mPlayer->setTexture(mPlayertexture,false);
 	mPlayer->setOrigin((TILE_SCALE/2),(TILE_SCALE*3/4));//TODO//21-10-15//MagicNumbers
 	mPlayer->mShadow->setTexture(mShadowTexture,true);
@@ -133,7 +150,7 @@ void GameLoop::GameInitialise()
 	mPlayer->SetBall(mBall);
 	//player.setCameraPos(mainCamera.position);
 	
-	mPlayers.push_back(mPlayer);
+	//mPlayers.push_back(mPlayer);
 	
 	
 	//mControllers.push_back(mPlayerController);
@@ -184,6 +201,7 @@ void GameLoop::Update()
 
 void GameLoop::GameUpdate()
 {	
+	//INPUT
 	mPlayerController->Update();
 	
 	if(mServer)
@@ -193,19 +211,9 @@ void GameLoop::GameUpdate()
 	}
 	else if(mClient)
 	{
-		PlayerController tempController;
-		tempController.state.leftStick.x=60.0f;
-		tempController.state.leftStick.y=0.0f;
-
-		tempController.state.rightStick.x=100.0f;
-		tempController.state.rightStick.y=0.0f;
-
-		//mPlayerRed->Input(tempController.SendInput());
-
-		//mPlayer->Input(mNetworkPlayerController.SendInput());
+		mPlayerController->inputToSend->movementIntensity/=2;
 	}
 
-	//mainCamera.Input(mPlayerController->SendInput());
 	mPtrWindow->setView(mainView);
 
 	//DELTA TIME////////////////////////////
@@ -266,8 +274,6 @@ void GameLoop::GameUpdate()
 	mBall->Update();
 
 
-	
-
 	for(int i=0;i<EnvironmentTiles.size();i++)//TODO//13-09-15//Delete
 	{
 		EnvironmentTiles[i].Update();
@@ -276,13 +282,270 @@ void GameLoop::GameUpdate()
 	cameraTargetIcon.setWorldPosition(mainCamera.GetTargetWorldPosition().x,mainCamera.GetTargetWorldPosition().y);//TODO//22-10-15//Classify as debug ui
 	cameraTargetIcon.Update();
 
-	mainCamera.SetTargetWorld(mBall->getWorldPosition());
+	mainCamera.SetTargetWorld((mBall->getWorldPosition()+mPlayer->getWorldPosition())/2);
 	mainCamera.Update();
 
 
 	mainView.setCenter(ConvertVector2(mainCamera.position));
 
 	
+
+	//NETWORKING
+	//SEND
+	mNetUpdateTimer -= deltaTimeReal;
+	if(mNetUpdateTimer <= 0.0f)
+	{
+		mNetUpdateTimer = 1.0f/mNetUpdateRate;
+		if(mServer)
+		{
+			std::list<Socket*>::iterator itSock = mClients.begin();
+			for (std::list<Player*>::iterator it = mPlayers.begin(); (it != mPlayers.end())||(itSock != mClients.end()); it++)
+			{
+				if( *it != mPlayer)
+				{
+					//BALL
+					LocomotionData* tempLocomotionData = new LocomotionData();
+					tempLocomotionData->mPosition = mBall->getWorldPosition();
+					tempLocomotionData->mPositionZ = mBall->getWorldPositionZ();
+					tempLocomotionData->mVelocity = mBall->GetVelocity();
+					tempLocomotionData->mVelocityZ = mBall->GetVelocityZ();
+
+					Serialise(PacketType::ballData,(char*)tempLocomotionData,mNetworkData);
+				
+					(*itSock)->SetBuffer(mNetworkData);
+					if((*itSock)->Send()==-1)
+					{
+						MessageBox(NULL,L"Error Sending Update Message to client",L"Error",MB_OK);
+					}
+					else
+					{
+						//message sent
+					}
+
+
+					for(std::list<Player*>::iterator itPlayersToSend = mPlayers.begin(); itPlayersToSend != mPlayers.end(); itPlayersToSend++)
+					{
+						if(itPlayersToSend != it)
+						{
+							//LOCOMOTION
+
+							/*
+							//INPUT
+							PlayerInputData* tempPlayerData = new PlayerInputData();
+							tempPlayerData->playerNumber = (*itPlayersToSend)->mPlayerNumber;
+							tempPlayerData->playerInput = (*itPlayersToSend)->GetPlayerInput();
+							
+							Serialise(PacketType::playerInputData,(char*)tempPlayerData,mNetworkData);
+						
+							(*itSock)->SetBuffer(mNetworkData);
+							if((*itSock)->Send()==-1)
+							{
+								MessageBox(NULL,L"Error Sending Update Message to client",L"Error",MB_OK);
+							}
+							else
+							{
+								//message sent
+							}
+							*/
+
+							//LOCOMOTION
+							PlayerLocomotionData* tempPlayerLocomotionData = new PlayerLocomotionData();
+							tempPlayerLocomotionData->playerNumber= (*itPlayersToSend)->mPlayerNumber;
+							tempPlayerLocomotionData->locomotionData.mPosition = (*itPlayersToSend)->getWorldPosition();
+							tempPlayerLocomotionData->locomotionData.mPositionZ = (*itPlayersToSend)->getWorldPositionZ();
+							tempPlayerLocomotionData->locomotionData.mVelocity = (*itPlayersToSend)->getVelocity();
+							tempPlayerLocomotionData->locomotionData.mVelocityZ = (*itPlayersToSend)->GetVelocityZ();
+						
+							Serialise(PacketType::playerLocomotionData,(char*)tempPlayerLocomotionData,mNetworkData);
+						
+							(*itSock)->SetBuffer(mNetworkData);
+							if((*itSock)->Send()==-1)
+							{
+								MessageBox(NULL,L"Error Sending Update Message to client",L"Error",MB_OK);
+							}
+							else
+							{
+								//message sent
+							}
+						}						
+					}
+
+					itSock++;
+				}
+			}
+		}
+		else if(mClient)
+		{
+			
+			PlayerLocomotionData* tempPlayerLocomotionData = new PlayerLocomotionData();
+			tempPlayerLocomotionData->playerNumber= mPlayer->mPlayerNumber;
+			tempPlayerLocomotionData->locomotionData.mPosition = mPlayer->getWorldPosition();
+			tempPlayerLocomotionData->locomotionData.mPositionZ = mPlayer->getWorldPositionZ();
+			tempPlayerLocomotionData->locomotionData.mVelocity = mPlayer->getVelocity();
+			tempPlayerLocomotionData->locomotionData.mVelocityZ = mPlayer->GetVelocityZ();
+						
+			Serialise(PacketType::playerLocomotionData,(char*)tempPlayerLocomotionData,mNetworkData);
+						
+			mSocket->SetBuffer(mNetworkData);
+			if(mSocket->Send()==-1)
+			{
+				MessageBox(NULL,L"Error Sending Update Message to client",L"Error",MB_OK);
+			}
+			else
+			{
+				//message sent
+			}
+		}
+	}
+	
+	if(mPlayer->mBallKicked && mClient)
+	{
+		mPlayer->mBallKicked = false;
+
+		LocomotionData* tempLocomotionData = new LocomotionData();
+		tempLocomotionData->mPosition = mBall->getWorldPosition();
+		tempLocomotionData->mPositionZ = mBall->getWorldPositionZ();
+		tempLocomotionData->mVelocity = mBall->GetVelocity();
+		tempLocomotionData->mVelocityZ = mBall->GetVelocityZ();
+
+		Serialise(PacketType::ballData,(char*)tempLocomotionData,mNetworkData);
+				
+		mSocket->SetBuffer(mNetworkData);
+		if(mSocket->Send()==-1)
+		{
+			MessageBox(NULL,L"Error Sending Update Message to server",L"Error",MB_OK);
+		}
+		else
+		{
+			//message sent
+		}
+	}
+
+
+
+
+
+	//RECEIVE
+	if(mServer)
+	{
+		bool messagesLeft = true;
+		//while(messagesLeft)
+		{
+			if(mSocket->Receive(mNetworkData)==-1)
+			{
+				//wouldblock
+				messagesLeft = false;
+			}
+			else
+			{
+				void* data = new char[MESSAGESIZE];
+			
+				switch(DeSerialise(data,mNetworkData))
+				{
+					
+				case PacketType::ballData:
+					{
+					LocomotionData* usefulData = new LocomotionData;
+					memcpy(usefulData,data,sizeof(LocomotionData));
+
+					mBall->setWorldPosition(usefulData->mPosition.x,usefulData->mPosition.y);
+					mBall->setWorldPositionZ(usefulData->mPositionZ);
+					mBall->SetVelocity(usefulData->mVelocity,usefulData->mVelocityZ);
+					break;
+					}
+					
+					/*
+				case PacketType::playerInputData:
+					{
+					PlayerInputData* usefulData = new PlayerInputData;
+					memcpy(usefulData,data,sizeof(PlayerInputData));
+					//TODO//////////////////////////////////////////////////////////
+					break;
+					}
+					*/
+				case PacketType::playerLocomotionData:
+					{
+					PlayerLocomotionData* usefulData = new PlayerLocomotionData;
+					memcpy(usefulData,data,sizeof(PlayerLocomotionData));
+
+					for(std::list<Player*>::iterator it = mPlayers.begin(); it != mPlayers.end(); it++)
+					{
+						if(usefulData->playerNumber == (*it)->mPlayerNumber)
+						{
+							(*it)->setWorldPosition(usefulData->locomotionData.mPosition.x,usefulData->locomotionData.mPosition.y);
+							(*it)->setWorldPositionZ(usefulData->locomotionData.mPositionZ);
+							(*it)->SetVelocity(usefulData->locomotionData.mVelocity.x,usefulData->locomotionData.mVelocity.y,usefulData->locomotionData.mVelocityZ);
+
+							//it = mPlayers.end();
+						}
+					}
+					
+					break;
+					}
+
+				}
+			}
+		}
+	}
+	else if(mClient)
+	{
+		bool messagesLeft = true;
+		while(messagesLeft)
+		{
+			if(mSocket->Receive(mNetworkData)==-1)
+			{
+				//wouldblock
+				messagesLeft = false;
+			}
+			else
+			{
+				void* data = new char[MESSAGESIZE];
+			
+
+				switch(DeSerialise(data,mNetworkData))
+				{
+				case PacketType::ballData:
+					{
+					LocomotionData* usefulData = new LocomotionData;
+					memcpy(usefulData,data,sizeof(LocomotionData));
+
+					mBall->setWorldPosition(usefulData->mPosition.x,usefulData->mPosition.y);
+					mBall->setWorldPositionZ(usefulData->mPositionZ);
+					mBall->SetVelocity(usefulData->mVelocity,usefulData->mVelocityZ);
+					break;
+					}
+				case PacketType::playerInputData:
+					{
+					PlayerInputData* usefulData = new PlayerInputData;
+					memcpy(usefulData,data,sizeof(PlayerInputData));
+					//TODO//////////////////////////////////////////////////////////
+					break;
+					}
+				case PacketType::playerLocomotionData:
+					{
+					PlayerLocomotionData* usefulData = new PlayerLocomotionData;
+					memcpy(usefulData,data,sizeof(PlayerLocomotionData));
+
+					for(std::list<Player*>::iterator it = mPlayers.begin(); it != mPlayers.end(); it++)
+					{
+						if(usefulData->playerNumber == (*it)->mPlayerNumber)
+						{
+							(*it)->setWorldPosition(usefulData->locomotionData.mPosition.x,usefulData->locomotionData.mPosition.y);
+							(*it)->setWorldPositionZ(usefulData->locomotionData.mPositionZ);
+							(*it)->SetVelocity(usefulData->locomotionData.mVelocity.x,usefulData->locomotionData.mVelocity.y,usefulData->locomotionData.mVelocityZ);
+
+							//it = mPlayers.end();
+						}
+					}
+					
+					break;
+					}
+
+				}
+			}
+		}
+	}
+
 	//UI////////////////////////////////////
 	//sf::Mouse::getPosition(tempWind);
 
@@ -304,7 +567,6 @@ void GameLoop::GameUpdate()
 void GameLoop::MenuUpdate()
 {
 	MenuEventLoop();
-
 
 	switch(mMenuState)
 	{
@@ -330,12 +592,10 @@ void GameLoop::MenuUpdate()
 		else
 		{
 			//Deserialise
-			
 			void* data = new char[MESSAGESIZE];
 			switch(DeSerialise(data,mNetworkData))
 			{
 			case PacketType::joinRequest:
-				
 				//Create socket for each client
 				Socket* tempClientSocket = new Socket();
 				tempClientSocket->Initialise();
@@ -344,9 +604,7 @@ void GameLoop::MenuUpdate()
 				mClients.push_back(tempClientSocket);
 
 
-				
 				JoinRequest* usefulData = new JoinRequest;
-
 				memcpy(usefulData,data,sizeof(JoinRequest));
 
 				mCurrentPlayersAmount++;
@@ -364,10 +622,42 @@ void GameLoop::MenuUpdate()
 					tempJoinGranted->playerTeam = 1;
 				}
 
+
 				Serialise(PacketType::joinGranted,(char*)tempJoinGranted,mNetworkData);
 				tempClientSocket->SetBuffer(mNetworkData);
-				tempClientSocket->Send();
+				if(tempClientSocket->Send()==-1)
+				{
+					MessageBox(NULL,L"Error Sending Message to client",L"Error",MB_OK);
+				}
 
+
+
+				PlayerController* tempPlayerController = new PlayerController();
+				mControllers.push_back(tempPlayerController);
+
+				Player* tempPlayer = SpawnPlayer(tempPlayerController);
+				tempPlayer->mPlayerNumber = mCurrentPlayersAmount;
+				tempPlayer->mTeam = tempJoinGranted->playerTeam;
+
+				switch(tempJoinGranted->playerTeam)
+				{
+				case 1:
+					tempPlayer->setWorldPosition(4.0f,5.0f + tempJoinGranted->playerNumber);
+					tempPlayer->setColor(sf::Color::Blue);
+					
+					break;
+				
+				case 2:
+					tempPlayer->setWorldPosition(20.0f,5.0f + tempJoinGranted->playerNumber);
+					tempPlayer->setColor(sf::Color::Red);
+					break;
+
+				default:
+					tempPlayer->setWorldPosition(1.0f,1.0f);
+					tempPlayer->setColor(sf::Color::Magenta);
+					break;
+				}
+				
 				break;
 			}
 		}
@@ -375,16 +665,51 @@ void GameLoop::MenuUpdate()
 
 		if(mGameReady)
 		{
-			GameStart tempGameStart;
-			tempGameStart.numberOfPlayers = mCurrentPlayersAmount;
+			mPlayer = new Player(true);
+			mPlayer->mPlayerNumber = 1;
+			mPlayer->mTeam = 1;
+			mPlayer->setWorldPosition(4.0f,6.0f);
+			mPlayers.push_back(mPlayer);
+			
 
-			Serialise(PacketType::gameStart,(char*)&tempGameStart,mNetworkData);
+			int tempPlayerNumberToSend = 1;
 
-			for (std::list<Socket*>::iterator it = mClients.begin(); it != mClients.end(); it++)
+			for (std::list<Socket*>::iterator itSock = mClients.begin(); itSock!=mClients.end();itSock++)
 			{
-				(*it)->ClearBuffers();
-				(*it)->SetBuffer(mNetworkData);
-				(*it)->Send();
+				GameStart* tempGameStart = new GameStart();
+				tempGameStart->numberOfPlayers = mCurrentPlayersAmount;
+
+				Serialise(PacketType::gameStart,(char*)tempGameStart,mNetworkData);
+
+				(*itSock)->ClearBuffers();
+				(*itSock)->SetBuffer(mNetworkData);
+				if((*itSock)->Send()==-1)
+				{
+					MessageBox(NULL,L"Error Sending Message to clients",L"Error",MB_OK);
+				}
+
+
+				for (std::list<Player*>::iterator it = mPlayers.begin(); it != mPlayers.end(); it++)
+				{			
+
+					PlayerLocomotionData* tempPlayerLocomotionData = new PlayerLocomotionData;
+					tempPlayerLocomotionData->playerNumber = tempPlayerNumberToSend;
+					tempPlayerLocomotionData->locomotionData.mPosition =  (*it)->getWorldPosition();
+					tempPlayerLocomotionData->locomotionData.mPositionZ = (*it)->getWorldPositionZ();
+					tempPlayerLocomotionData->locomotionData.mVelocity = (*it)->getVelocity();
+					tempPlayerLocomotionData->locomotionData.mVelocityZ = (*it)->GetVelocityZ();
+
+					Serialise(PacketType::playerLocomotionData,(char*)tempPlayerLocomotionData,mNetworkData);
+
+					(*itSock)->ClearBuffers();
+					(*itSock)->SetBuffer(mNetworkData);
+					if((*itSock)->Send()==-1)
+					{
+						MessageBox(NULL,L"Error Sending Message to clients",L"Error",MB_OK);
+					}
+				
+					tempPlayerNumberToSend++;
+				}
 			}
 
 			mInGame = true;
@@ -417,8 +742,6 @@ void GameLoop::MenuUpdate()
 			
 			//Serialise
 			Serialise(PacketType::joinRequest,(char*)tempJoinRequest,mNetworkData);
-
-			//SEND
 			mSocket->SetBuffer(mNetworkData);
 			if(mSocket->Send()==-1)
 			{
@@ -429,10 +752,11 @@ void GameLoop::MenuUpdate()
 		}
 		break;
 	case 3:///////////////////CLIENT//waiting for game start
-
+		
+		
 		if(mSocket->Receive(mNetworkData)==-1)
 		{
-			//wouldblock
+			//Would block
 		}
 		else
 		{
@@ -449,7 +773,7 @@ void GameLoop::MenuUpdate()
 					mPlayer = new Player(true);
 					mPlayer->mPlayerNumber = usefulData->playerNumber;
 					mPlayer->mTeam = usefulData->playerTeam;
-
+					
 					break;
 				}
 
@@ -458,20 +782,69 @@ void GameLoop::MenuUpdate()
 					GameStart* usefulData = new GameStart;
 					memcpy(usefulData,data,sizeof(GameStart));
 
-					for(int i = 0; i < usefulData->numberOfPlayers; i++)
+					mPlayers.clear();
+					
+					int iModifier = 0;
+					for(int i = 1; i < usefulData->numberOfPlayers; i++)
 					{
 						PlayerController* tempPlayerController = new PlayerController();
 					
-						SpawnPlayer(tempPlayerController);
+						Player* tempPlayer = SpawnPlayer(tempPlayerController);
+						
+						if(i == mPlayer->mPlayerNumber)
+						{
+							iModifier = 1;
+						}
+						
+						tempPlayer->mPlayerNumber = i + iModifier;
 
 						mControllers.push_back(tempPlayerController);
 					}
 
-					mInGame=true;
+					mPlayers.push_back(mPlayer);
+
+					break;
+				}
+
+			case PacketType::playerLocomotionData:
+				{
+					PlayerLocomotionData* usefulData = new PlayerLocomotionData();
+					memcpy(usefulData,data,sizeof(PlayerLocomotionData));
+
+					for (std::list<Player*>::iterator it = mPlayers.begin(); it != mPlayers.end(); it++)
+					{
+						if((*it)->mPlayerNumber == usefulData->playerNumber)
+						{
+								
+							(*it)->setWorldPosition(usefulData->locomotionData.mPosition.x,usefulData->locomotionData.mPosition.y);
+							(*it)->setWorldPositionZ(usefulData->locomotionData.mPositionZ);
+							(*it)->SetVelocity(usefulData->locomotionData.mVelocity.x,usefulData->locomotionData.mVelocity.y,usefulData->locomotionData.mVelocityZ);
+
+
+							if((*it)->mPlayerNumber%2 == 0)
+							{
+								(*it)->mTeam = 2;
+							}
+							else
+							{
+								(*it)->mTeam = 1;
+							}
+
+
+							playersSetUp++;
+						}
+					}
+
+					if(playersSetUp == mPlayers.size())
+					{
+						mInGame = true;
+					}
+				
 					break;
 				}
 			}
 		}
+		
 		break;
 	}
 
@@ -503,12 +876,12 @@ void GameLoop::Serialise(PacketType packetTypeIn, char* dataIn,char* bufferOut)
 		memcpy(&bufferOut[sizeof(PacketType)], dataIn, sizeof(LocomotionData));
 		break;
 
-	case PacketType::playerData:
-		memcpy(&bufferOut[sizeof(PacketType)], dataIn, sizeof(LocomotionData));
+	case PacketType::playerLocomotionData:
+		memcpy(&bufferOut[sizeof(PacketType)], dataIn, sizeof(PlayerLocomotionData));
 		break;
 
 	case PacketType::playerInputData:
-		memcpy(&bufferOut[sizeof(PacketType)], dataIn, sizeof(PlayerInput));
+		memcpy(&bufferOut[sizeof(PacketType)], dataIn, sizeof(PlayerInputData));
 		break;
 
 	case PacketType::joinGranted:
@@ -529,23 +902,12 @@ PacketType GameLoop::DeSerialise(void*& dataOut, char* bufferIn)
 	*tempPacketType = PacketType::nullPacket;
 
 
+	//Copying Enum
 	char* tempBuffer = new char[16];
-	tempBuffer[0] = bufferIn[0];
-	tempBuffer[1] = bufferIn[1];
-	tempBuffer[2] = bufferIn[2];
-	tempBuffer[3] = bufferIn[3];
-	tempBuffer[4] = bufferIn[4];
-	tempBuffer[5] = bufferIn[5];
-	tempBuffer[6] = bufferIn[6];
-	tempBuffer[7] = bufferIn[7];
-	tempBuffer[8] = bufferIn[8];
-	tempBuffer[9] = bufferIn[9];
-	tempBuffer[10] = bufferIn[10];
-	tempBuffer[11] = bufferIn[11];
-	tempBuffer[12] = bufferIn[12];
-	tempBuffer[13] = bufferIn[13];
-	tempBuffer[14] = bufferIn[14];
-	tempBuffer[15] = bufferIn[15];
+	for(int i = 0; i < sizeof(PacketType);i++)
+	{
+		tempBuffer[i] = bufferIn[i];
+	}
 
 
 	*tempPacketType = (PacketType)*tempBuffer;
@@ -558,11 +920,17 @@ PacketType GameLoop::DeSerialise(void*& dataOut, char* bufferIn)
 	case PacketType::ballData:
 		memcpy(dataOut,&bufferIn[sizeof(PacketType)],sizeof(LocomotionData));
 		break;
-	case PacketType::playerData:
-		memcpy(dataOut,&bufferIn[sizeof(PacketType)],sizeof(LocomotionData));
+	case PacketType::playerLocomotionData:
+		memcpy(dataOut,&bufferIn[sizeof(PacketType)],sizeof(PlayerLocomotionData));
 		break;
 	case PacketType::playerInputData:
-		memcpy(dataOut,&bufferIn[sizeof(PacketType)],sizeof(PlayerInput));
+		memcpy(dataOut,&bufferIn[sizeof(PacketType)],sizeof(PlayerInputData));
+		break;
+	case PacketType::joinGranted:
+		memcpy(dataOut,&bufferIn[sizeof(PacketType)],sizeof(JoinGranted));
+		break;
+	case PacketType::gameStart:
+		memcpy(dataOut,&bufferIn[sizeof(PacketType)],sizeof(GameStart));
 		break;
 	}
 
@@ -626,14 +994,10 @@ void GameLoop::Draw()
 		mPtrWindow->draw(*(*it)->mShadow);
 		mPtrWindow->draw(*(*it));
 	}
-
-	
 	
 	
 	mPtrWindow->draw(*mBall->mShadow);
 	mPtrWindow->draw(*mBall);
-	
-
 	
 
 	//UI////////////////////////////////////
@@ -951,12 +1315,12 @@ void GameLoop::AIUpdate()
 	//TODO
 }
 
-void GameLoop::SpawnPlayer(PlayerController* ptrPlayerControllerIn)
+Player* GameLoop::SpawnPlayer(PlayerController* ptrPlayerControllerIn)
 {
 	Player* tempPlayer;
 	tempPlayer = new Player(true);
 
-	tempPlayer->Initialise(sf::Vector2f(100.0f,100.0f),sf::Color::White);//TODO//21-10-15//MagicNumbers	
+	tempPlayer->Initialise(sf::Vector2f(100.f,100.f),sf::Color::White);//TODO//21-10-15//MagicNumbers	
 	tempPlayer->setTexture(mPlayertexture,false);
 	tempPlayer->setOrigin((TILE_SCALE/2),(TILE_SCALE*3/4));//TODO//21-10-15//MagicNumbers
 	tempPlayer->mShadow->setTexture(mShadowTexture,true);
@@ -966,6 +1330,8 @@ void GameLoop::SpawnPlayer(PlayerController* ptrPlayerControllerIn)
 
 
 	mPlayers.push_back(tempPlayer);
+
+	return tempPlayer;
 }
 
 sf::Text GameLoop::DisplayText(Vector2 positionIn, std::string phraseIn, float valueIn)

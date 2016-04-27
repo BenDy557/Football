@@ -49,7 +49,7 @@ void Socket::Initialise()
 		if((PORTNUMBERMIN+tempPortIncrement) > PORTNUMBERMAX)
 		{
 			//die("Ports unavailable");//TODO//ReplaceDie
-			MessageBox(NULL,L"Error Ports unavailable",L"Error",MB_OK);
+			MessageBox(NULL,L"Error Server side Ports unavailable",L"Error",MB_OK);
 			return;
 		}
 	}
@@ -62,7 +62,7 @@ void Socket::InitialiseServerSocket()
 	if(!SocketSetUp(SOCK_DGRAM,SERVERIP,SERVERPORT,tempPortIncrement))
 	{
 		//die("Ports unavailable");//TODO//ReplaceDie
-		MessageBox(NULL,L"Error Ports unavailable",L"Error",MB_OK);
+		MessageBox(NULL,L"Error Client side Ports unavailable",L"Error",MB_OK);
 	}
 }
 void Socket::Initialise(char* currentIPIn)

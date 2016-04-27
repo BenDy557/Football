@@ -31,8 +31,6 @@ public:
 	GameLoop()
 		:aiThread(&GameLoop::AIUpdate,this)
 	{
-		mInGame = false;
-		mGameReady = false;
 		gameTime = prevGameTime = gameTime.Zero;
 		timeScale = 1.0f;
 		paused = false;//TODO//13-09-15//
@@ -41,21 +39,27 @@ public:
 		frameCount = 0;
 		debugMode = 0;
 
+		mNetUpdateRate = 10;
+		mNetUpdateTimer = 1.0f/mNetUpdateRate;
 		mMenuState = 0;
+		mInGame = false;
+		mGameReady = false;
+		playersSetUp = 0;
 		mClient = false;
 		mServer = false;
 		mIPReady = false;
 		mServerIP = "";
-		
 		mNetworkData = new char[MESSAGESIZE];
 		memset(mNetworkData,'p',MESSAGESIZE);
 		mNetworkData[MESSAGESIZE-1] = '\0';
-		
+		mSocket = new Socket();
 
 		mPlayer = nullptr;
+		mBall = nullptr;
+		mPlayerController = nullptr;
+
 		mCurrentPlayersAmount = 1;
 
-		mSocket = new Socket();
 		
 		LoadTextures();
 	}
@@ -85,7 +89,7 @@ private:
 	void Reset();
 	void Pause();
 
-	void SpawnPlayer(PlayerController* ptrPlayerControllerIn);
+	Player* SpawnPlayer(PlayerController* ptrPlayerControllerIn);
 
 
 	//Networking
@@ -101,13 +105,18 @@ private:
 	bool mGameReady;
 	bool mIPReady;
 	int mMenuState;
+	int playersSetUp;
 	
 	//NETWORKING//////////
 	bool mClient;
 	bool mServer;
+	
 	std::string mServerIP;
 	Socket* mSocket;
 	char* mNetworkData;//Networking data in/out
+
+	float mNetUpdateRate;
+	float mNetUpdateTimer;
 
 	int mCurrentPlayersAmount;
 	int mMaxPlayers;

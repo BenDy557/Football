@@ -4,8 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include "Vector2.h"
 
-const int GLOBAL_S_WIDTH	=	1280;		//client area resolution
-const int GLOBAL_S_HEIGHT	=	720;
+const int GLOBAL_S_WIDTH	=	800;		//client area resolution
+const int GLOBAL_S_HEIGHT	=	600;
 
 const int GLOBAL_S_XPOS =	200;		//client position
 const int GLOBAL_S_YPOS =	100;
@@ -98,7 +98,8 @@ const sf::Color wallColor(36.0f,82.0f,36.0f);
 
 
 //NETWORKING STRUCTS
-enum PacketType{nullPacket,playerInputData,playerData,ballData,joinRequest,joinGranted,gameStart};
+enum PacketType{nullPacket,playerInputData,playerLocomotionData,ballData,joinRequest,joinGranted,gameStart};
+
 
 struct LocomotionData
 {
@@ -106,6 +107,18 @@ struct LocomotionData
 	float mPositionZ;
 	Vector2 mVelocity;
 	float mVelocityZ;
+};
+
+struct PlayerInputData
+{
+	short playerNumber;
+	PlayerInput playerInput;
+};
+
+struct PlayerLocomotionData
+{
+	short playerNumber;
+	LocomotionData locomotionData;
 };
 
 struct JoinRequest

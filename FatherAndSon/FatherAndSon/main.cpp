@@ -48,11 +48,13 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	gameLoop.SetClock(&clock);
 	gameLoop.SetWindow(&window);
+
+	
 	////////////////////////////////////////
 	//WINDOW OPEN///////////////////////////
     while (window.isOpen())
     {
-		window.clear();
+		window.clear(/*sf::Color::Color(40.0f,94.0f,91.0f,255.0f)*/);
 		
 		gameLoop.Update();
         window.display();
